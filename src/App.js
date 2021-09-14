@@ -5,6 +5,7 @@ function App() {
   return (
     <div className="App">
         <h2>ZZZZ</h2>
+        <a href="/spassistent">clickme</a>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
