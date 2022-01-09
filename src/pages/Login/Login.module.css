@@ -1,0 +1,65 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+.centerWindow {
+    width: 400px;
+    /*height: 200px;*/
+    margin-top: 70px;
+    border-radius: 5px;
+    border: 1px solid #adadad;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+.titleLine {
+    border-bottom: 1px solid #adadad;
+    padding-bottom: 10px;
+    font-weight: bold;
+    font-size: x-large;
+}
+.inputSection {
+    flex: 1;
+    margin-top: 10px;
+    padding-right: 4px;
+}
+.inputLine {
+    display: flex;
+    margin-top: 10px;
+}
+.inputLeftPart {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    text-transform: capitalize;
+}
+.inputRightPart {
+    padding-left: 10px;
+    flex: 2;
+}
+.errorText {
+    flex: 1;
+    color: red;
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+.actionSection {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between
+}
+.links {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.link {
+    color: #0054ad;
+    text-decoration: underline;
+    cursor: pointer;
+    user-select: none;
+}

@@ -1,0 +1,16 @@
+.wrapper {
+}
+.input {
+    border: none;
+    background-color: #00000014;
+    width: 100%;
+    border-radius: 4px;
+    padding: 3px;
+}
+.input:focus {
+    /*font-weight: bold;*/
+    color: #0a1c74;
+    outline: none;
+
+    /*border-bottom: 1px solid #23242536;*/
+}

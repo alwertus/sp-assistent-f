@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './app/App';
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
-import store from "./app/store/Store";
+import store from "./store/Store";
 
 ReactDOM.render(
     <BrowserRouter>

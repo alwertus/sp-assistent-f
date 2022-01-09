@@ -1,12 +1,156 @@
-import './App.css';
-import {DEL1Comp} from "../delme/DEL1/DEL1Comp";
+import style from './App.module.css';
+import { Route, Routes, useLocation } from 'react-router-dom'
+import {useEffect, useState} from "react";
+import {LoginComp} from "../pages/Login/LoginComp";
+import {useDispatch, useSelector} from "react-redux";
+import {str} from "../common/Language";
+import {MainComp} from "../pages/Main/MainComp";
+import {InfoComp} from "../pages/Info/InfoComp";
+import {CashComp} from "../pages/Cash/CashComp";
+import {EMPTY_USER, LOGIN_STATUS} from "../common/Structures";
+import {useNavigate} from "react-router";
+import {MenuTabComp} from "../components/MenuTab/MenuTabComp";
+import imgAccount from  "../common/img/account.svg";
+import {getLocalStorageValue} from "../common/LocalStorage";
+import {verifyToken} from "./AppActions";
 
-function App() {
-  return (
-    <div className="App">
-        <DEL1Comp/>
-    </div>
-  );
+
+const App = () => {
+    // const text = Array(1000).fill("long text. ")
+    const dispatch = useDispatch()
+    const currentLang = useSelector(state => state['currentLanguage'])
+    const history = useNavigate()
+    const location = useLocation()
+
+    const [userInfo, setUserInfo] = useState(EMPTY_USER)
+
+    const [footerText, setFooterText] = useState("...")
+    const [loginStatus, setLoginStatus] = useState(LOGIN_STATUS.UNAUTHORIZED)
+
+    const pages = [
+        {
+            key:"",
+            title:str("Main"),
+            available:true,
+            comp:<MainComp/>
+        },
+        {
+            key:"info",
+            title:str("Info"),
+            available:false,
+            comp:<InfoComp/>
+        },
+        {
+            key:"cash",
+            title:str("Cash"),
+            available:false,
+            comp:<CashComp/>
+        },
+        {
+            key:"login",
+            available:true,
+            title:userInfo.firstName,
+            image: imgAccount,
+            rightMenu: true,
+            textFirst: true,
+            comp:<LoginComp
+                setFooterText={setFooterText}
+                loginStatus={loginStatus}
+                setLoginStatus={setLoginStatus}
+                userInfo={userInfo}
+                setUserInfo={setUserInfo}
+                // setIsLoggedIn={setIsLoggedIn}
+            />
+        },
+    ]
+
+    const updateLanguage = (lang) => {
+        dispatch({type:"SET_LANGUAGE", newValue: lang})
+    }
+    const filterPageAuthorized = e => (loginStatus === LOGIN_STATUS.AUTHORIZED) ? e : e.available === true
+    const filterPageStart = e => !e.rightMenu
+    const filterPageEnd = e => !!e.rightMenu
+
+    const loginCheck = () => {
+        setFooterText(loginStatus)
+
+        if (loginStatus === LOGIN_STATUS.UNAUTHORIZED) {
+            let token = getLocalStorageValue("token")
+            if (!!token) {
+                setLoginStatus(LOGIN_STATUS.WAITING)
+                verifyToken(token, setLoginStatus)
+            }
+        }
+    }
+
+    useEffect(loginCheck,[loginStatus])
+
+    const drawLangButton = (lang) =>
+        <button
+            className={
+                currentLang === lang
+                    ? style.footerButtonSelect
+                    : ""}
+            onClick={() => updateLanguage(lang)}
+            >{str(lang)}
+        </button>
+
+    const drawMenuTab = (e) => <MenuTabComp
+        key={e.key}
+        onClick={() => history('/' + e.key)}
+        text={e.title}
+        image={e.image}
+        textFirst={e.textFirst}
+        selected={location.pathname === "/" + e.key}
+    />
+
+    return (
+        <div className={style.app}>
+            <div className={style.header}>
+                <div className={style.headerStart}>
+                    {pages
+                        .filter(filterPageStart)
+                        .filter(filterPageAuthorized)
+                        .map(drawMenuTab)
+                    }
+                </div>
+                <div className={style.headerCenter}>
+                    {str("header")}
+                </div>
+                <div className={style.headerEnd}>
+                    {pages
+                        .filter(filterPageEnd)
+                        .filter(filterPageAuthorized)
+                        .map(drawMenuTab)
+                    }
+                </div>
+            </div>
+            <div className={style.content}>
+                <Routes>
+                    {pages
+                        .filter(filterPageAuthorized)
+                        .map((e) =>
+                            <Route
+                                key={e.key}
+                                exact
+                                path={"/" + e.key}
+                                element={e.comp}
+                            /> )
+                    }
+                </Routes>
+
+            </div>
+            <div className={style.footer}>
+                <div className={style.footerStart}>
+                    {footerText}
+                </div>
+                <div className={style.footerEnd}>
+                    {drawLangButton("en")}
+                    {drawLangButton("ru")}
+                </div>
+            </div>
+        </div>
+    )
 }
 
 export default App;

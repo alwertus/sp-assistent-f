@@ -1,0 +1,19 @@
+.wrapper {
+    user-select: none;
+    cursor: pointer;
+    display: flex;
+    flex: 1;
+    padding: 5px;
+    align-items: center;
+}
+.reverse {
+    flex-direction: row-reverse;
+}
+.selected {
+    background-color: #929cff4f;
+}
+.text {
+}
+.emptyBox {
+    min-width: 4px;
+}
