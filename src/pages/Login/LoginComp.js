@@ -48,6 +48,7 @@ export const LoginComp = props => {
         setUserInfo(EMPTY_USER)
         setLocalStorageValue(API_RQ.TOKEN, "")
         setLocalStorageValue(API_RQ.TOKEN_REFRESH, "")
+        setIsRegister(false)
     }
 
     const onClickSave = () => {

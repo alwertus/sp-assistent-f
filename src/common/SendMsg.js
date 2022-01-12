@@ -9,6 +9,7 @@ const DEBUG = true;
 // const URL = store.getState().OptionsServerAddress + "/api/v1/"
 // const URL = "http://192.168.1.9:9000/auth/"
 const URL = "http://localhost:9000/"
+//const URL = "http://alwertus.zapto.org:9000/"
 
 export function sendMsg(
     target,
