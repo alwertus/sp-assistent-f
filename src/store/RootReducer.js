@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux';
-import {currentLanguage} from "../app/AppReducer";
+import {currentLanguage, serverAddress} from "../app/AppReducer";
 
 export default combineReducers({
-    currentLanguage
+    currentLanguage,
+    serverAddress
 });

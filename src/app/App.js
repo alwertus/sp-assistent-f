@@ -7,12 +7,12 @@ import {str} from "../common/Language";
 import {MainComp} from "../pages/Main/MainComp";
 import {InfoComp} from "../pages/Info/InfoComp";
 import {CashComp} from "../pages/Cash/CashComp";
-import {EMPTY_USER, LOGIN_STATUS} from "../common/Structures";
+import {API_RQ, EMPTY_USER, LOGIN_STATUS} from "../common/Structures";
 import {useNavigate} from "react-router";
 import {MenuTabComp} from "../components/MenuTab/MenuTabComp";
 import imgAccount from  "../common/img/account.svg";
 import {getLocalStorageValue} from "../common/LocalStorage";
-import {verifyToken} from "./AppActions";
+import {getUserInfo} from "../pages/Login/LoginActions";
 
 
 const App = () => {
@@ -75,10 +75,10 @@ const App = () => {
         setFooterText(loginStatus)
 
         if (loginStatus === LOGIN_STATUS.UNAUTHORIZED) {
-            let token = getLocalStorageValue("token")
+            let token = getLocalStorageValue(API_RQ.TOKEN)
             if (!!token) {
                 setLoginStatus(LOGIN_STATUS.WAITING)
-                verifyToken(token, setLoginStatus)
+                getUserInfo(() => {setLoginStatus(LOGIN_STATUS.AUTHORIZED)},null, null, setUserInfo)
             }
         }
     }

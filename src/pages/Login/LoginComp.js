@@ -5,8 +5,13 @@ import {setLocalStorageValue} from "../../common/LocalStorage"
 import {getToken, getUserInfo, register, updateUser} from "./LoginActions"
 import {str} from "../../common/Language";
 import {InputTextComp} from "../../components/InputText/InputTextComp";
+import {useDispatch, useSelector} from "react-redux";
 
 export const LoginComp = props => {
+    // Set back url
+    const dispatch = useDispatch()
+    const serverURL = useSelector(state => state['serverAddress'])
+
     const userInfo = props['userInfo']
     const [login, setLogin] = useState(userInfo.login)
     const [firstName, setFirstName] = useState(userInfo.firstName)
@@ -66,14 +71,29 @@ export const LoginComp = props => {
                 isRegister ? onClickRegister() : onClickLogin()
         }
     }
+    const drawServerURL = () =>
+        <div className={style.serverUrlWrapper}>
+            <div className={style.serverUrl}>
+                <InputTextComp
+                    key={4}
+                    autoFocus={true}
+                    text={serverURL}
+                    setText={(newVal) => dispatch({type:"SET_SERVER", newValue: newVal})}
+                    onChange={() => setErrorText("")}
+                    onKeyPress={onKeyPress}
+                    varRef={setRefLogin}
+                />
+            </div>
+        </div>
+
 
     // "new account" mode
     useEffect(() => {setErrorText("")},[isRegister])
 
     useEffect(() => {
         if (loginStatus === LOGIN_STATUS.AUTHORIZED && !userInfo.login)
-            getUserInfo(setFirstName, setLastName, setUserInfo)
-    }, [loginStatus])
+            getUserInfo(setLogin, setFirstName, setLastName, setUserInfo)
+    }, [loginStatus, setUserInfo, userInfo.login])
 
     useEffect(() => {
         setBtnSave_Active(firstName !== userInfo.firstName || lastName !== userInfo.lastName)
@@ -83,6 +103,7 @@ export const LoginComp = props => {
 
         // if user authenticated
     ? <div className={style.wrapper}>
+            {drawServerURL()}
             <div className={style.centerWindow}>
                 <div className={style.titleLine}>
                     {str("Personal Data")}
@@ -153,6 +174,7 @@ export const LoginComp = props => {
 
         // draw if user not authenticated
     : <div className={style.wrapper}>
+            {drawServerURL()}
         <div className={style.centerWindow}>
             <div className={style.titleLine}>
                 {str(isRegister ? "Register" : "Log in")}

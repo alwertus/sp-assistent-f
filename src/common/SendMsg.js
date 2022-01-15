@@ -4,12 +4,9 @@
 
 import {getLocalStorageValue, setLocalStorageValue} from "./LocalStorage";
 import {API_RQ} from "./Structures";
+import store from "../store/Store";
 
 const DEBUG = true;
-// const URL = store.getState().OptionsServerAddress + "/api/v1/"
-// const URL = "http://192.168.1.9:9000/auth/"
-const URL = "http://localhost:9000/"
-//const URL = "http://alwertus.zapto.org:9000/"
 
 export function sendMsg(
     target,
@@ -18,9 +15,11 @@ export function sendMsg(
     errorHandler = () => {},
     isResending = false,
     isRefreshToken = false) {
-
-    const url = URL + target
+    const server = store.getState()['serverAddress']
+    const url = server + '/' + target
     const token = getLocalStorageValue(isRefreshToken ? API_RQ.TOKEN_REFRESH : API_RQ.TOKEN)
+
+    console.log(url)
 
     if (DEBUG) console.log(">> Request to '" + target + "'. Body=", bodyObj);
 
@@ -87,52 +86,7 @@ export function sendMsg(
             })
         }
 
-/*
-
-
-
-        // if (DEBUG) console.log("<< Response (" + rsStatus + ")", rs)
-        try {
-            json = rs.json();
-        } catch (e) {
-            if (DEBUG) console.error("<< Error convert to json msg: ", rs)
-        }
-        console.warn("TYPE=", typeof json, json)
-        // return rs.json();
-        return json;*/
-
-    })/*.then(rs => {
-        console.warn("ZZZZ 1")
-        if (DEBUG) console.log("<< Response JSON (" + rsStatus + ")", rs)
-        let rsResult = rs[API_RQ.RESULT]
-        let rsError = rs[API_RQ.ERROR]
-
-        if (rsStatus === 200) {
-
-            if (!rsResult)
-                errorHandler("Result is null")
-
-            else if (rsResult !== "Ok") {
-                errorHandler(!!rsError ? rsError : rsResult)
-
-            } else
-                successHandler(rs)
-
-        } else if (rsStatus === 410 && !isResending) {  // if token is expired
-            console.log("Refresh token")
-            sendMsg("refresh",
-                {token: token,
-                refresh: "2"},
-                () => console.log("refresh success"),
-                () => console.log("refresh error"))
-            // repeat send
-            sendMsg(target, bodyObj, successHandler, errorHandler, true)
-
-        } else {
-            errorHandler(!!rsError ? rsError : rsResult)
-        }
-
-    })*/.catch( e => {
+    }).catch( e => {
         if (DEBUG) console.error("<< ERROR", e)
         errorHandler();
     });

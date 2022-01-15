@@ -63,3 +63,11 @@
     cursor: pointer;
     user-select: none;
 }
+.serverUrlWrapper {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+.serverUrl {
+    color: red;
+}

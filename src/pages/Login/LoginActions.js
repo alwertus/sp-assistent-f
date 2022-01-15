@@ -19,16 +19,17 @@ export function getToken(user, password, setLoginStatus, setErrorText) {
     })
 }
 
-export function getUserInfo(setFirstName, setLastName, setUserInfo) {
+export function getUserInfo(setLogin, setFirstName, setLastName, setUserInfo) {
     sendMsg("api/user/myInfo",{},(rs) => {
         let newUser = {
             login : !!rs[API_RQ.LOGIN] ? rs[API_RQ.LOGIN] : "",
             firstName : !!rs[API_RQ.FIRST_NAME] ? rs[API_RQ.FIRST_NAME] : "",
             lastName : !!rs[API_RQ.LAST_NAME] ? rs[API_RQ.LAST_NAME] : "",
         }
-        setFirstName(newUser.firstName)
-        setLastName(newUser.lastName)
-        setUserInfo(newUser)
+        if (!!setLogin) setLogin(newUser.login)
+        if (!!setFirstName) setFirstName(newUser.firstName)
+        if (!!setLastName) setLastName(newUser.lastName)
+        if (!!setUserInfo) setUserInfo(newUser)
     },()=>{})
 }
 export function register(user, password, setLoginStatus, setErrorText) {
@@ -36,7 +37,7 @@ export function register(user, password, setLoginStatus, setErrorText) {
     sendMsg("api/user/register", {
         login: user,
         password: password
-    }, (rs) => {
+    }, () => {
         getToken(user, password, setLoginStatus, setErrorText)
         // setLoginStatus(LOGIN_STATUS.AUTHORIZED)
         // setLocalStorageValue(API_RQ.TOKEN, rs[API_RQ.TOKEN])
