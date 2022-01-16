@@ -137,6 +137,8 @@ const App = () => {
                                 element={e.comp}
                             /> )
                     }
+                    {/* 404 page */}
+                    <Route path={"/*"} element={<MainComp/>}/>
                 </Routes>
 
             </div>
