@@ -57,7 +57,11 @@ export function sendMsg(
                     // repeat sending
                     sendMsg(target, bodyObj, successHandler, errorHandler, true, false)
                 },
-                () => console.error("Refresh token error"),
+                () => {
+                    console.error("Refresh token error")
+                    setLocalStorageValue(API_RQ.TOKEN, '')
+                    setLocalStorageValue(API_RQ.TOKEN_REFRESH, '')
+                },
                 true,
                 true)
 

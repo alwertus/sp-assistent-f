@@ -15,6 +15,12 @@ export const LOGIN_STATUS = fillStruct("LOGIN_STATUS", {
     AUTHORIZED: "",
     ERROR: "",
 })
+export const INFO_STATUS = fillStruct("INFO_STATUS", {
+    OUTDATED : "",
+    LOADING : "",
+    ACTUAL : "",
+    ERROR : "",
+})
 
 export const API_RQ = {
     RESULT : "result",

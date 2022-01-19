@@ -1,0 +1,51 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    position: relative;
+    overflow: hidden;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.actions {
+    display: flex;
+    flex-direction: row;
+    background-color: gray;
+}
+.page {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}
+
+.menuContainer {
+    min-width: 150px;
+    box-sizing: border-box;
+    background-color: #d5d5d5;
+}
+.menu {
+    display: flex;
+
+    box-sizing: inherit;
+    height: 87vh;
+    direction: rtl;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex-direction: column;
+}
+.content {
+    display: flex;
+    flex: 1;
+    box-sizing: inherit;
+    height: 87vh;
+    overflow-y: auto;
+    flex-direction: column;
+}
+.normalDirection {
+    direction: ltr;
+}

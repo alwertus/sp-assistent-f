@@ -1,0 +1,15 @@
+.wrapper {
+    display: flex;
+}
+.isPressed {
+    fill: #f5f1f1;
+}
+.isNotPressed {
+    fill: #c3c3c3;
+}
+.wrapper:hover {
+    fill: #e4ecff;
+}
+.sizeNormal {
+    width: 2em;
+}

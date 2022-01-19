@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "nvm": "^0.0.4",
     "react": "latest",
     "react-dom": "latest",
     "react-redux": "latest",

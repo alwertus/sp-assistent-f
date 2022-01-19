@@ -72,7 +72,7 @@ const App = () => {
     const filterPageEnd = e => !!e.rightMenu
 
     const loginCheck = () => {
-        setFooterText(loginStatus)
+        // setFooterText(loginStatus)
 
         if (loginStatus === LOGIN_STATUS.UNAUTHORIZED) {
             let token = getLocalStorageValue(API_RQ.TOKEN)

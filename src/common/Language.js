@@ -35,7 +35,11 @@ const structure = {
         "en":{                                  "ru":"анг"},
         "ru":{                                  "ru":"рус"},
         "Bad credentials":{                     "en":"Incorrect username or password",
-                                                "ru":"Неверные логин или пароль"}
+                                                "ru":"Неверные логин или пароль"},
+//  Page INFO
+        "Space":{                               "ru":"Пространство"},
+        "Title":{                               "ru":"Заголовок"},
+        "Description":{                         "ru":"Описание"},
     }
 }
 
