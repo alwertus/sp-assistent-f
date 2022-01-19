@@ -6,3 +6,9 @@
 .wrapper>* {
     margin-left: 10px;
 }
+.select {
+    border: none;
+    background-color: #00000014;
+    border-radius: 4px;
+    padding: 3px;
+}
