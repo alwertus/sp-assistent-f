@@ -1,0 +1,26 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    background-color: #00000010;
+    padding: 2px;
+    border-radius: 4px;
+    user-select: none;
+    cursor: pointer;
+}
+.isPressed {
+    fill: #f5f1f1;
+}
+.isNotPressed {
+    fill: #595858;
+}
+.wrapper:hover {
+    fill: #e4ecff;
+    color: #e4ecff;
+    background-color: #00000033;
+}
+.sizeNormal>svg {
+    width: 2em;
+}
+.text {
+    margin-left: 3px;
+}

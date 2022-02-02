@@ -27,24 +27,31 @@ const App = () => {
     const [footerText, setFooterText] = useState("...")
     const [loginStatus, setLoginStatus] = useState(LOGIN_STATUS.UNAUTHORIZED)
 
+    const [headerElement, setHeaderElement] = useState(str("header"))
+
+    const mainComponent = <MainComp
+        setHeader={setHeaderElement}/>
+
     const pages = [
         {
             key:"",
             title:str("Main"),
             available:true,
-            comp:<MainComp/>
+            comp:mainComponent
         },
         {
             key:"info",
             title:str("Info"),
             available:false,
-            comp:<InfoComp/>
+            comp:<InfoComp setHeader={setHeaderElement}
+                           setFooterText={setFooterText}
+            />
         },
         {
             key:"cash",
             title:str("Cash"),
             available:false,
-            comp:<CashComp/>
+            comp:<CashComp setHeader={setHeaderElement}/>
         },
         {
             key:"login",
@@ -54,6 +61,7 @@ const App = () => {
             rightMenu: true,
             textFirst: true,
             comp:<LoginComp
+                setHeader={setHeaderElement}
                 setFooterText={setFooterText}
                 loginStatus={loginStatus}
                 setLoginStatus={setLoginStatus}
@@ -115,7 +123,7 @@ const App = () => {
                     }
                 </div>
                 <div className={style.headerCenter}>
-                    {str("header")}
+                    {headerElement}
                 </div>
                 <div className={style.headerEnd}>
                     {pages
@@ -138,10 +146,11 @@ const App = () => {
                             /> )
                     }
                     {/* 404 page */}
-                    <Route path={"/*"} element={<MainComp/>}/>
+                    <Route path={"/*"} element={mainComponent}/>
                 </Routes>
 
             </div>
+            {/*TODO: FOOTER вылезает на передний план НАД страницей контента*/}
             <div className={style.footer}>
                 <div className={style.footerStart}>
                     {footerText}

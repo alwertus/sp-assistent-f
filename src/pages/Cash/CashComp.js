@@ -1,11 +1,15 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {/*useSelector, */useDispatch} from "react-redux";
 import style from "./CashS.module.css";
 
 export const CashComp = props => {
+    const setHeader = props['setHeader']
+
     const [count, setCount] = useState(0);
     // const server = useSelector(state => state.OptionsServerAddress); // Redux param
     const dispatch = useDispatch();
+
+    useEffect(() => setHeader(""), [])
 
     return <div className={style.wrapper}>
         <h2>CASH</h2>

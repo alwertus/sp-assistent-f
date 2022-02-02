@@ -1,7 +1,11 @@
 .wrapper {
     display: flex;
     align-items: center;
-    padding: 4px;
+    /*padding: 2px;*/
+    border: 1px solid #00000030;
+    border-radius: 4px;
+    margin: 2px;
+    background-color: #ffffff33;
 }
 .wrapper>* {
     margin-left: 10px;

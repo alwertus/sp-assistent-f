@@ -1,0 +1,25 @@
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    /*justify-content: space-between;*/
+    background-color: #d7dbdb;
+    padding: 3px;
+}
+.path {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+    padding-bottom: 4px;
+}
+.newTitle {
+    display: flex;
+    align-items: center;
+}
+.buttonWrapper {
+    margin-left: 4px;
+}
+.buttonEditWrapper {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+}

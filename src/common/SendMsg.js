@@ -18,10 +18,12 @@ export function sendMsg(
     const server = store.getState()['serverAddress']
     const url = server + '/' + target
     const token = getLocalStorageValue(isRefreshToken ? API_RQ.TOKEN_REFRESH : API_RQ.TOKEN)
+    const resultErr = errorText => {
+        errorHandler(errorText)
+        if (DEBUG) console.error(errorText)
+    }
 
-    console.log(url)
-
-    if (DEBUG) console.log(">> Request to '" + target + "'. Body=", bodyObj);
+    if (DEBUG) console.log(">> Request to '" + url + "'. Body=", bodyObj);
 
     let headers = new Headers();
     headers.append("Authorization", token);
@@ -35,10 +37,11 @@ export function sendMsg(
         if (rsStatus === 200) {
 
             if (!rsResult)
-                errorHandler("Result is null")
+                resultErr("Result is null")
+
 
             else if (rsResult !== "Ok") {
-                errorHandler(!!rsError ? rsError : rsResult)
+                resultErr(!!rsError ? rsError : rsResult)
 
             } else
                 successHandler(rs)
@@ -58,6 +61,7 @@ export function sendMsg(
                     sendMsg(target, bodyObj, successHandler, errorHandler, true, false)
                 },
                 () => {
+                //TODO: Тут должен сбрасываться статус логина, а логин статус должен быть глобальным состоянием
                     console.error("Refresh token error")
                     setLocalStorageValue(API_RQ.TOKEN, '')
                     setLocalStorageValue(API_RQ.TOKEN_REFRESH, '')
@@ -66,7 +70,7 @@ export function sendMsg(
                 true)
 
         } else {
-            errorHandler(!!rsError ? rsError : rsResult)
+            resultErr(!!rsError ? rsError : rsResult)
         }
     }
     const textHandler = (text) => {
@@ -92,7 +96,6 @@ export function sendMsg(
                 textHandler(response)
             }
     }).catch( e => {
-        if (DEBUG) console.error("<< ERROR", e)
-        errorHandler();
+        resultErr("<< ERROR" + e)
     });
 }

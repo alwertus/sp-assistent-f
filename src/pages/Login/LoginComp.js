@@ -12,6 +12,7 @@ export const LoginComp = props => {
     const dispatch = useDispatch()
     const serverURL = useSelector(state => state['serverAddress'])
 
+    const setHeader = props['setHeader']
     const userInfo = props['userInfo']
     const [login, setLogin] = useState(userInfo.login)
     const [firstName, setFirstName] = useState(userInfo.firstName)
@@ -24,7 +25,7 @@ export const LoginComp = props => {
     const [refPassword, setRefPassword] = useState()
     const loginStatus = props['loginStatus']
     const setLoginStatus = props['setLoginStatus']
-    const setUserInfo = props['setUserInfo'] // global var
+    const setUserInfo = props['setUserInfo']
     const [btnSave_Active, setBtnSave_Active] = useState(true)
 
     const onClickLogin = () => {
@@ -98,6 +99,8 @@ export const LoginComp = props => {
     useEffect(() => {
         setBtnSave_Active(firstName !== userInfo.firstName || lastName !== userInfo.lastName)
     }, [firstName, lastName, userInfo])
+
+    useEffect(() => setHeader(""), [])
 
     return loginStatus === LOGIN_STATUS.AUTHORIZED
 

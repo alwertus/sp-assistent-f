@@ -21,6 +21,10 @@ export const INFO_STATUS = fillStruct("INFO_STATUS", {
     ACTUAL : "",
     ERROR : "",
 })
+export const TEXT_MODE = fillStruct("TEXT_MODE", {
+    NORMAL : "",
+    EDIT : ""
+})
 
 export const API_RQ = {
     RESULT : "result",

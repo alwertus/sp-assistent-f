@@ -6,22 +6,29 @@ import {createSpace, getSpaces, selectSpace} from "./SpacesActions";
 import {InputTextComp} from "../../../../components/InputText/InputTextComp";
 import {INFO_STATUS} from "../../../../common/Structures";
 import {str} from "../../../../common/Language";
+import {useSelector} from "react-redux";
 
-export const SpacesComp = () => {
+export const SpacesComp = props => {
+    useSelector(state => state['currentLanguage']) // add this to refresh component if lang is changed
+
     const [spaces, setSpaces] = useState([])
     const [space, setSpace] = useState()
     const [addMode, setAddMode] = useState(false)
     const [spaceTitle, setSpaceTitle] = useState("")
     const [spaceDescription, setSpaceDescription] = useState("")
     const [status, setStatus] = useState(INFO_STATUS.OUTDATED)
+    const refreshData = props['refreshData']
+
+
 
     useEffect(() => {if (status === INFO_STATUS.OUTDATED) {
         setStatus(INFO_STATUS.WAITING)
-        getSpaces(setStatus, setSpaces, setSpace)
+        getSpaces(refreshData, setStatus, setSpaces, setSpace)
     }},[status])
 
     return addMode
         ? <div className={style.wrapper}>
+            <span>{str("New Space")}:</span>
             <div>
                 {str("Title")}
                 <InputTextComp setText={setSpaceTitle}/>

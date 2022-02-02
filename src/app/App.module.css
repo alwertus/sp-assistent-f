@@ -21,6 +21,7 @@
   justify-content: center;
 }
 .headerEnd {
+  display: flex;
 }
 
 .content {
