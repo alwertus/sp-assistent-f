@@ -23,8 +23,12 @@ export const PanelActionsComp = props => {
         isPressed={showMenu}/>
 
     const drawPath = () => <div className={style.path}>{path}</div>
-    const drawButton_edit = () => <div className={style.buttonEditWrapper}>
+    const drawRightPart = () => <div className={style.rightPanelPart}>
         <ActionButtonComp
+            icon={ICONS.save}
+            onClick={()=>console.log("SAVE")}
+        />
+        <ActionButtonComp   // button Edit Page
             text={"EDIT PAGE"}
             onClick={()=>setContentMode(contentMode === TEXT_MODE.EDIT ? TEXT_MODE.NORMAL : TEXT_MODE.EDIT)} />
     </div>
@@ -59,7 +63,7 @@ export const PanelActionsComp = props => {
                     }}
                 />
             </div>
-            {drawButton_edit()}
+            {drawRightPart()}
         </div>
 
         : <div className={style.wrapper}>
@@ -70,6 +74,6 @@ export const PanelActionsComp = props => {
                 text={str("New page")}
                 onClick={()=>setAddMode(true)}
             />
-            {drawButton_edit()}
+            {drawRightPart()}
         </div>
 }

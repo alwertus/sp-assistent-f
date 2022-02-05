@@ -1,5 +1,5 @@
 import style from './App.module.css';
-import { Route, Routes, useLocation } from 'react-router-dom'
+import {Route, Routes, useLocation} from 'react-router-dom'
 import {useEffect, useState} from "react";
 import {LoginComp} from "../pages/Login/LoginComp";
 import {useDispatch, useSelector} from "react-redux";
@@ -10,7 +10,7 @@ import {CashComp} from "../pages/Cash/CashComp";
 import {API_RQ, EMPTY_USER, LOGIN_STATUS} from "../common/Structures";
 import {useNavigate} from "react-router";
 import {MenuTabComp} from "../components/MenuTab/MenuTabComp";
-import imgAccount from  "../common/img/account.svg";
+import imgAccount from "../common/img/account.svg";
 import {getLocalStorageValue} from "../common/LocalStorage";
 import {getUserInfo} from "../pages/Login/LoginActions";
 
@@ -32,6 +32,10 @@ const App = () => {
     const mainComponent = <MainComp
         setHeader={setHeaderElement}/>
 
+    const infoComponent = <InfoComp setHeader={setHeaderElement}
+                                    setFooterText={setFooterText}
+                                    location={"info"}/>
+
     const pages = [
         {
             key:"",
@@ -43,9 +47,14 @@ const App = () => {
             key:"info",
             title:str("Info"),
             available:false,
-            comp:<InfoComp setHeader={setHeaderElement}
-                           setFooterText={setFooterText}
-            />
+            comp:infoComponent,
+        },
+        {
+            key:"info/:id",
+            routeOnly:true,
+            title:str("Info"),
+            available:false,
+            comp:infoComponent,
         },
         {
             key:"cash",
@@ -76,8 +85,8 @@ const App = () => {
         dispatch({type:"SET_LANGUAGE", newValue: lang})
     }
     const filterPageAuthorized = e => (loginStatus === LOGIN_STATUS.AUTHORIZED) ? e : e.available === true
-    const filterPageStart = e => !e.rightMenu
-    const filterPageEnd = e => !!e.rightMenu
+    const filterPageStart = e => !e.rightMenu && !e.routeOnly
+    const filterPageEnd = e => !!e.rightMenu && !e.routeOnly
 
     const loginCheck = () => {
         // setFooterText(loginStatus)
@@ -137,13 +146,12 @@ const App = () => {
                 <Routes>
                     {pages
                         .filter(filterPageAuthorized)
-                        .map((e) =>
-                            <Route
-                                key={e.key}
-                                exact
-                                path={"/" + e.key}
-                                element={e.comp}
-                            /> )
+                        .map((e) => <Route
+                                    key={e.key}
+                                    exact
+                                    path={e.key}
+                                    element={e.comp}
+                                />)
                     }
                     {/* 404 page */}
                     <Route path={"/*"} element={mainComponent}/>

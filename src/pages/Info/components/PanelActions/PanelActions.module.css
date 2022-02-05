@@ -18,7 +18,7 @@
 .buttonWrapper {
     margin-left: 4px;
 }
-.buttonEditWrapper {
+.rightPanelPart {
     display: flex;
     justify-content: flex-end;
     flex: 1;
