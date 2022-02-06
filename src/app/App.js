@@ -118,7 +118,7 @@ const App = () => {
         text={e.title}
         image={e.image}
         textFirst={e.textFirst}
-        selected={location.pathname === "/" + e.key}
+        selected={!!e.key ? location.pathname.startsWith("/" + e.key) : location.pathname === "/" + e.key}
     />
 
     return (

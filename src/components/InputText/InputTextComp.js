@@ -15,23 +15,23 @@ import style from "./InputText.module.css"
 
  */
 
-export const InputTextComp = props => {
-    const setText = props['setText']
-    const text = props['text']
-    const disabled = !!props['disabled'] ? props['disabled'] : false
-    const type = !!props['type'] ? props['type'] : "text"
-    const onChange = !!props['onChange'] ? props['onChange'] : ()=>{}
-    const autoFocus = !!props['autoFocus'] ? props['autoFocus'] : false
-    const onKeyPress = !!props['onKeyPress'] ? props['onKeyPress'] : ()=>{}
-    const varRef = useRef()
+export const InputTextComp = ({   setText,
+                                  text,
+                                  disabled = false,
+                                  type = "text",
+                                  onChange = ()=>{},
+                                  autoFocus = false,
+                                  onKeyPress = ()=>{},
+                                  varRef}) => {
+    const ref = useRef()
 
     useEffect(() => {
-        if (!!props['varRef'])
-            props['varRef'](varRef)
-    }, [props])
+        if (!!varRef)
+            varRef(ref)
+    }, [varRef])
 
     return <input
-        ref={varRef}
+        ref={ref}
         type={type}
         className={style.input}
         autoFocus={autoFocus}

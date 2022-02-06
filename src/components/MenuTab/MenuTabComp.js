@@ -1,13 +1,14 @@
 import React from "react"
 import style from "./MenuTab.module.css"
 
-export const MenuTabComp = props => {
-    const onClick = props['onClick']
-    const text = !!props['text'] ? props['text'] : ""
-    const image = !!props['image'] ? props['image'] : null
-    const imageText = !!props['imageText'] ? props['imageText'] : ""
-    const selected = !!props['selected']
-    const textFirst = !!props['textFirst']
+export const MenuTabComp = ({
+    onClick,
+    text = "",
+    image = null,
+    imageText = "",
+    selected = false,
+    textFirst = false, }) => {
+
     const styleWrappers = [style.wrapper, textFirst ? style.reverse : null, selected ? style.selected : null]
     const styleWrapper = styleWrappers.join(" ")
 

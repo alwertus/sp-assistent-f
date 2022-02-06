@@ -42,6 +42,7 @@ const structure = {
         "Title":{                               "ru":"Заголовок"},
         "Description":{                         "ru":"Описание"},
         "New page":{                            "ru":"Новая страница"},
+        "Select Page":{                         "ru":"Выбери страницу"},
     }
 }
 

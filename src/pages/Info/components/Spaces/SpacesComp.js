@@ -7,9 +7,11 @@ import {InputTextComp} from "../../../../components/InputText/InputTextComp";
 import {INFO_STATUS} from "../../../../common/Structures";
 import {str} from "../../../../common/Language";
 import {useSelector} from "react-redux";
+import {useNavigate} from "react-router";
 
-export const SpacesComp = props => {
+export const SpacesComp = ({refreshData, location}) => {
     useSelector(state => state['currentLanguage']) // add this to refresh component if lang is changed
+    const navigate = useNavigate()
 
     const [spaces, setSpaces] = useState([])
     const [space, setSpace] = useState()
@@ -17,13 +19,15 @@ export const SpacesComp = props => {
     const [spaceTitle, setSpaceTitle] = useState("")
     const [spaceDescription, setSpaceDescription] = useState("")
     const [status, setStatus] = useState(INFO_STATUS.OUTDATED)
-    const refreshData = props['refreshData']
 
-
+    const refreshLocation = () => {
+        navigate("/" + location)
+    }
 
     useEffect(() => {if (status === INFO_STATUS.OUTDATED) {
         setStatus(INFO_STATUS.WAITING)
         getSpaces(refreshData, setStatus, setSpaces, setSpace)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }},[status])
 
     return addMode
@@ -62,7 +66,7 @@ export const SpacesComp = props => {
                 value={space}
                 onChange={e => {
                     if (space !== e.target.value)
-                        selectSpace(e.target.value, setSpace)
+                        selectSpace(e.target.value, setSpace, refreshData, refreshLocation)
                 }}>
                 {status === INFO_STATUS.ACTUAL
                 && spaces.map(e => <option key={e.id} value={e.id}>{e.title}</option>)

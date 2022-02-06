@@ -5,35 +5,62 @@ import {useSelector} from "react-redux";
 import {PanelActionsComp} from "./components/PanelActions/PanelActionsComp";
 import {MenuPagesComp} from "./components/MenuPages/MenuPagesComp";
 import {INFO_STATUS, TEXT_MODE} from "../../common/Structures";
-import {getPageList} from "./InfoActions";
+import {getHtml, getPageList, sendSaveHtml} from "./InfoActions";
 import {PageComp} from "./components/Page/PageComp";
 import {useParams} from "react-router-dom";
 
 export const InfoComp = ({setHeader, setFooterText, location}) => {
     useSelector(state => state['currentLanguage']) // add this to refresh component when lang is changed
 
-
     // const text = <ol>{Array(200).fill(<li key={Math.round(Math.random()*100000000+Math.random()*10000000)}>1</li>)}</ol>
     const [showMenu, setShowMenu] = useState(true)
     const [menuStatus, setMenuStatus] = useState(INFO_STATUS.ACTUAL)
     const [pages, setPages] = useState([])
     const [contentStatus, setContentStatus] = useState(INFO_STATUS.OUTDATED)
-    const [page, setPage] = useState(`<h2>AHAHAH</h2>`)
+    const [tmpHtml, setTmpHtml] = useState("")
+    const [html, sHtml] = useState("")
     const [contentMode, setContentMode] = useState(TEXT_MODE.NORMAL)
     const {id} = useParams()
 
-    const refreshData = () => {
-        setMenuStatus(INFO_STATUS.OUTDATED)
+    const setHtml = (newVal) => {
+        sHtml(newVal)
+        setTmpHtml(newVal)
     }
 
-    useEffect(() => setHeader(<SpacesComp refreshData={refreshData}/>),[setHeader])
+    const refreshPage = () => {
+        setContentStatus(INFO_STATUS.OUTDATED)
+    }
 
+    const refreshData = () => {
+        setMenuStatus(INFO_STATUS.OUTDATED)
+        refreshPage()
+    }
+
+    const saveHtml = () => {
+        if (!id || tmpHtml === html) return
+        sendSaveHtml(id, tmpHtml, setHtml)
+    }
+
+    useEffect(() => setHeader(<SpacesComp
+        refreshData={refreshData}
+        location={location}
+    />),[setHeader]) // eslint-disable-line react-hooks/exhaustive-deps
+
+    // update if menuStatus is outdated
     useEffect(()=> {
         setFooterText(menuStatus)
         if (menuStatus === INFO_STATUS.OUTDATED) {
             getPageList(setPages, setMenuStatus)
         }
     }, [menuStatus, setFooterText])
+
+    // update if contentStatus is outdated
+    useEffect(() => {
+
+        if (contentStatus === INFO_STATUS.OUTDATED && !!id) {
+            getHtml(id, setHtml, setContentStatus)
+        }
+    }, [contentStatus, id])
 
     const draw = {
         menu: () => showMenu && <div className={style.menuContainer}>
@@ -42,7 +69,7 @@ export const InfoComp = ({setHeader, setFooterText, location}) => {
                     <MenuPagesComp
                         menuStatus={menuStatus}
                         setMenuStatus={setMenuStatus}
-                        refreshData={refreshData}
+                        refreshPage={refreshPage}
                         pages={pages}
                         location={location}
                     />
@@ -51,9 +78,10 @@ export const InfoComp = ({setHeader, setFooterText, location}) => {
         </div>,
         context: () => <div className={style.content}>
             <PageComp
+                id={id}
                 contentStatus={contentStatus}
-                html={page}
-                setHtml={setPage}
+                html={html}
+                setHtml={setTmpHtml}
                 isEditMode={contentMode === TEXT_MODE.EDIT}
             />
         </div>,
@@ -67,8 +95,10 @@ export const InfoComp = ({setHeader, setFooterText, location}) => {
                 refreshData={refreshData}
                 contentMode={contentMode}
                 setContentMode={setContentMode}
+                editButtonAvailable={contentStatus === INFO_STATUS.ACTUAL && !!id}
+                saveHtml={saveHtml}
+                saveHtmlAvailable={html !== tmpHtml}
             />
-            {"id=" + (id ? id : "null")}
             <div className={style.page}>
                 {draw.menu()}
                 {/*<div>resizer</div>*/}

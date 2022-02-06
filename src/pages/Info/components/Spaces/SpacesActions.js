@@ -16,8 +16,10 @@ export function createSpace(title, description, setStatusHandler) {
     },()=>{})
 }
 
-export function selectSpace(newSpaceId, setSpaceHandler) {
+export function selectSpace(newSpaceId, setSpaceHandler, refreshData, refreshLocation) {
     sendMsg("api/info/selectSpace",{spaceId: newSpaceId},() => {
         setSpaceHandler(newSpaceId)
+        refreshLocation()
+        refreshData()
     },()=>{})
 }

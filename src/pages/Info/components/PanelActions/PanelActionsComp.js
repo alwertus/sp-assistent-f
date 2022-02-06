@@ -7,12 +7,7 @@ import {str} from "../../../../common/Language";
 import {createPage} from "./PanelActionsActions";
 import {TEXT_MODE} from "../../../../common/Structures";
 
-export const PanelActionsComp = props => {
-    const setShowMenu = props['setShowMenu']
-    const showMenu = props['showMenu']
-    const invokeRefreshData = props['refreshData']
-    const contentMode = props['contentMode']
-    const setContentMode = props['setContentMode']
+export const PanelActionsComp = ({editButtonAvailable, setShowMenu, showMenu, invokeRefreshData, contentMode, setContentMode, saveHtml, saveHtmlAvailable}) => {
     const [addMode, setAddMode] = useState(false)
     const [newTitle, setNewTitle] = useState("")
     const [path, setPath] = useState("~/pages/")
@@ -24,13 +19,19 @@ export const PanelActionsComp = props => {
 
     const drawPath = () => <div className={style.path}>{path}</div>
     const drawRightPart = () => <div className={style.rightPanelPart}>
-        <ActionButtonComp
-            icon={ICONS.save}
-            onClick={()=>console.log("SAVE")}
-        />
-        <ActionButtonComp   // button Edit Page
-            text={"EDIT PAGE"}
-            onClick={()=>setContentMode(contentMode === TEXT_MODE.EDIT ? TEXT_MODE.NORMAL : TEXT_MODE.EDIT)} />
+        {
+            saveHtmlAvailable &&
+            <ActionButtonComp   // button Save
+                icon={ICONS.save}
+                onClick={()=>saveHtml()}
+            />
+        }
+        {
+            editButtonAvailable &&
+            <ActionButtonComp   // button Edit Page
+                text={"EDIT PAGE"}
+                onClick={() => setContentMode(contentMode === TEXT_MODE.EDIT ? TEXT_MODE.NORMAL : TEXT_MODE.EDIT)}/>
+        }
     </div>
 
     return addMode

@@ -10,3 +10,17 @@ export function getPageList(setPagesHandler, setMenuStatus) {
         },
         err => setMenuStatus(INFO_STATUS.ERROR))
 }
+
+export function getHtml(id, setHtml, setContentStatus) {
+    setContentStatus(INFO_STATUS.WAITING)
+    sendMsg("api/info/getHtml",{id: id},
+        rs => {
+            setContentStatus(INFO_STATUS.ACTUAL)
+            setHtml(rs['html'])
+        },
+        err => setContentStatus(INFO_STATUS.ERROR))
+}
+
+export function sendSaveHtml(id, html, setHtml) {
+    sendMsg("api/info/saveHtml",{id: id, html: html}, () => setHtml(html))
+}
