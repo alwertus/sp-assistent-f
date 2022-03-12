@@ -1,0 +1,15 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+}
+.icon {
+    margin-right: 4px;
+}
+.text {
+    font-weight: bold;
+    flex: 1;
+}
+.access {
+
+}

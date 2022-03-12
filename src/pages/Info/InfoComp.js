@@ -19,6 +19,7 @@ export const InfoComp = ({setHeader, setFooterText, location}) => {
     const [contentStatus, setContentStatus] = useState(INFO_STATUS.OUTDATED)
     const [tmpHtml, setTmpHtml] = useState("")
     const [html, sHtml] = useState("")
+    const [title, setTitle] = useState("")
     const [contentMode, setContentMode] = useState(TEXT_MODE.NORMAL)
     const {id} = useParams()
 
@@ -27,13 +28,15 @@ export const InfoComp = ({setHeader, setFooterText, location}) => {
         setTmpHtml(newVal)
     }
 
-    const refreshPage = () => {
-        setContentStatus(INFO_STATUS.OUTDATED)
+    const refresh = {
+        page: () => setContentStatus(INFO_STATUS.OUTDATED),
+        menu: () => setMenuStatus(INFO_STATUS.OUTDATED),
     }
 
     const refreshData = () => {
-        setMenuStatus(INFO_STATUS.OUTDATED)
-        refreshPage()
+        console.log("Refresh Data")
+        refresh.menu()
+        refresh.page()
     }
 
     const saveHtml = () => {
@@ -58,7 +61,7 @@ export const InfoComp = ({setHeader, setFooterText, location}) => {
     useEffect(() => {
 
         if (contentStatus === INFO_STATUS.OUTDATED && !!id) {
-            getHtml(id, setHtml, setContentStatus)
+            getHtml(id, setHtml, setTitle, setContentStatus)
         }
     }, [contentStatus, id])
 
@@ -69,8 +72,9 @@ export const InfoComp = ({setHeader, setFooterText, location}) => {
                     <MenuPagesComp
                         menuStatus={menuStatus}
                         setMenuStatus={setMenuStatus}
-                        refreshPage={refreshPage}
+                        refresh={refresh}
                         pages={pages}
+                        setPages={setPages}
                         location={location}
                     />
                 </div>
@@ -80,7 +84,7 @@ export const InfoComp = ({setHeader, setFooterText, location}) => {
             <PageComp
                 id={id}
                 contentStatus={contentStatus}
-                html={html}
+                html={tmpHtml}
                 setHtml={setTmpHtml}
                 isEditMode={contentMode === TEXT_MODE.EDIT}
             />
@@ -92,12 +96,15 @@ export const InfoComp = ({setHeader, setFooterText, location}) => {
             <PanelActionsComp
                 showMenu={showMenu}
                 setShowMenu={setShowMenu}
-                refreshData={refreshData}
+                invokeRefreshData={refreshData}
                 contentMode={contentMode}
                 setContentMode={setContentMode}
                 editButtonAvailable={contentStatus === INFO_STATUS.ACTUAL && !!id}
                 saveHtml={saveHtml}
                 saveHtmlAvailable={html !== tmpHtml}
+                selectedPageId={id}
+                selectedPageTitle={title}
+                selectedPageSetTitle={setTitle}
             />
             <div className={style.page}>
                 {draw.menu()}

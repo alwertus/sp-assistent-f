@@ -43,8 +43,15 @@ export function sendMsg(
             else if (rsResult !== "Ok") {
                 resultErr(!!rsError ? rsError : rsResult)
 
-            } else
-                successHandler(rs)
+            } else {
+                try {
+                    successHandler(rs)
+                } catch (e) {
+                    console.error("Error while processing successHandler: " + e)
+                }
+
+            }
+
 
 
         } else if (rsStatus === 401

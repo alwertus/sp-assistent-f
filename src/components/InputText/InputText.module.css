@@ -1,6 +1,7 @@
 .wrapper {
 }
 .input {
+    flex: 1;
     border: none;
     background-color: #00000014;
     /*width: 100%;*/

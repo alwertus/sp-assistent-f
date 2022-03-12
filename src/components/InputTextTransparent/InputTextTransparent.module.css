@@ -1,0 +1,26 @@
+.wrapper {
+    display: flex;
+    flex: 1;
+}
+.input {
+    flex: 1;
+    padding: 0 5px;
+    border: none;
+    background-color: #00000005;
+    border-radius: 4px;
+    min-height: 2em;
+}
+.input:focus {
+    color: #0a1c74;
+    outline: none;
+    background-color: #00000009;
+}
+.expressive {
+    background-color: #00000040;
+}
+.expressive:focus {
+    background-color: #00000060;
+}
+.buttonWrapper {
+    margin-left: 3px;
+}

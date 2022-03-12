@@ -239,7 +239,7 @@ export const LoginComp = props => {
             </div>
             <div className={style.actionSection}>
                 <button
-                    disabled={loginStatus === LOGIN_STATUS.WAITING}
+                    // disabled={loginStatus === LOGIN_STATUS.WAITING}
                     onClick={isRegister ? onClickRegister : onClickLogin}
                 >{str(isRegister ? "Create" : "Log in")}</button>
             </div>

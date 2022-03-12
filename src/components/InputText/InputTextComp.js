@@ -22,7 +22,9 @@ export const InputTextComp = ({   setText,
                                   onChange = ()=>{},
                                   autoFocus = false,
                                   onKeyPress = ()=>{},
-                                  varRef}) => {
+                                  varRef,
+                                  onPressEnter = () => {}
+}) => {
     const ref = useRef()
 
     useEffect(() => {
@@ -42,5 +44,12 @@ export const InputTextComp = ({   setText,
             onChange(e.target.value)
         } }
         onKeyPress={(e) => onKeyPress(e)}
+        onKeyDown={(e) => {
+            if (e.key === 'Enter')
+                onPressEnter()
+            /*if (e.key === 'Escape')
+                cancelChangesHandler();*/
+
+        }}
     />
 }

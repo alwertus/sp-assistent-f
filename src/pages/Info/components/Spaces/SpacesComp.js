@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import style from "./SpacesS.module.css";
+import style from "./Spaces.module.css";
 import {ActionButtonComp} from "../../../../components/ActionButton/ActionButtonComp";
 import {ICONS} from "../../../../common/Icons";
 import {createSpace, getSpaces, selectSpace} from "./SpacesActions";
@@ -12,13 +12,12 @@ import {useNavigate} from "react-router";
 export const SpacesComp = ({refreshData, location}) => {
     useSelector(state => state['currentLanguage']) // add this to refresh component if lang is changed
     const navigate = useNavigate()
-
+    const [status, setStatus] = useState(INFO_STATUS.OUTDATED)
     const [spaces, setSpaces] = useState([])
     const [space, setSpace] = useState()
     const [addMode, setAddMode] = useState(false)
     const [spaceTitle, setSpaceTitle] = useState("")
     const [spaceDescription, setSpaceDescription] = useState("")
-    const [status, setStatus] = useState(INFO_STATUS.OUTDATED)
 
     const refreshLocation = () => {
         navigate("/" + location)
@@ -64,8 +63,9 @@ export const SpacesComp = ({refreshData, location}) => {
             <select
                 className={style.select}
                 value={space}
+                onClick={e => !space && console.log("CLICK ON NULL", e.target)}
                 onChange={e => {
-                    if (space !== e.target.value)
+                    // if (space !== e.target.value)
                         selectSpace(e.target.value, setSpace, refreshData, refreshLocation)
                 }}>
                 {status === INFO_STATUS.ACTUAL

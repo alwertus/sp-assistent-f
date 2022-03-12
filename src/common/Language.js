@@ -22,7 +22,7 @@ const structure = {
                                                 "ru":"У меня нет аккаунта"},
         "have-account":{                        "en":"I already have account",
                                                 "ru":"У меня уже есть аккаунт"},
-        "Cash":{                                "ru":"Деньги"},
+        "Cash":{                                "ru":"Финансы"},
         "Info":{                                "ru":"Инфо"},
         "Main":{                                "ru":"Главная"},
         "header":{                              "ru":"верхушка"},
@@ -43,6 +43,14 @@ const structure = {
         "Description":{                         "ru":"Описание"},
         "New page":{                            "ru":"Новая страница"},
         "Select Page":{                         "ru":"Выбери страницу"},
+        "Edit Page":{                           "ru":"Редактировать"},
+        "Root":{                                "ru":"Корень"},
+        "Space options":{                       "ru":"Настройки пространства"},
+        "Name":{                                "ru":"Наименование"},
+        "Close":{                               "ru":"Закрыть"},
+        "Access":{                              "ru":"Доступ"},
+        "Add":{                                 "ru":"Добавить"},
+        "Add Login":{                           "ru":"Добавить логин"},
     }
 }
 

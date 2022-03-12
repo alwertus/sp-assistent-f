@@ -1,15 +1,13 @@
 .wrapper {
     display: flex;
     flex-direction: row;
-    /*justify-content: space-between;*/
     background-color: #d7dbdb;
     padding: 3px;
 }
-.path {
+.titleWrapper {
     display: flex;
-    align-items: center;
     margin: 0 10px;
-    padding-bottom: 4px;
+    flex: 1;
 }
 .newTitle {
     display: flex;
@@ -22,4 +20,8 @@
     display: flex;
     justify-content: flex-end;
     flex: 1;
+}
+.newPageWrapper {
+    margin-left: 5px;
+    display: flex;
 }
