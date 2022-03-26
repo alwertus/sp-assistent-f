@@ -15,7 +15,6 @@ import {getLocalStorageValue} from "../common/LocalStorage";
 import {getUserInfo} from "../pages/Login/LoginActions";
 
 
-
 const App = () => {
     // const text = Array(1000).fill("long text. ")
     const dispatch = useDispatch()
@@ -38,15 +37,17 @@ const App = () => {
                                     location={"info"}/>
 
     const pages = [
-
-
         {
             key:"",
             title:str("Main"),
             available:true,
             comp:mainComponent
         },
-
+        {key:"",
+            title:str("News"),
+            available:true,
+            comp:mainComponent
+        },
         {
             key:"info",
             title:str("Info"),

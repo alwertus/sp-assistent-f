@@ -2,7 +2,6 @@ import React, {useEffect} from "react";
 import style from "./Main.module.css";
 import {str} from "../../common/Language.js";
 
-
 export const MainComp = props => {
     const setHeader = props['setHeader']
 
