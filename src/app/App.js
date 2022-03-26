@@ -43,11 +43,6 @@ const App = () => {
             available:true,
             comp:mainComponent
         },
-        {key:"",
-            title:str("News"),
-            available:true,
-            comp:mainComponent
-        },
         {
             key:"info",
             title:str("Info"),
