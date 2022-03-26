@@ -55,6 +55,8 @@ const structure = {
     }
 }
 
+
+
 export function str(key, part = "common") {
     const lang = store.getState()['currentLanguage'];
 
