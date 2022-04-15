@@ -46,8 +46,10 @@ export const MenuItemComp = ({element, params}) => {
     }
 
     const onClick_Title = () => {
-        if (currentId < 0) return
-        navigate("/" + location + "/" + currentId)
+        if (currentId < 0)
+            navigate("/" + location)
+        else
+            navigate("/" + location + "/" + currentId)
         refreshPage()
     }
     function onDragStartHandler() {
