@@ -5,11 +5,27 @@ import {ICONS} from "../../../../common/Icons";
 import {InputTextComp} from "../../../../components/InputText/InputTextComp";
 import {str} from "../../../../common/Language";
 import {createPage, renamePage} from "./PanelActionsActions";
-import {TEXT_MODE} from "../../../../common/Structures";
+import {INFO_STATUS, TEXT_MODE} from "../../../../common/Structures";
 import {InputTextTransparentComp} from "../../../../components/InputTextTransparent/InputTextTransparentComp";
 import {SpaceOptionsWindowComp} from "../SpaceOptionsWindow/SpaceOptionsWindowComp";
+import {sendSaveHtml} from "../../InfoActions";
 
-export const PanelActionsComp = ({editButtonAvailable, setShowMenu, showMenu, invokeRefreshData, contentMode, setContentMode, saveHtml, saveHtmlAvailable, selectedPageId, selectedPageTitle, selectedPageSetTitle}) => {
+export const PanelActionsComp = ({
+                                     pageList,
+                                     currentPage,
+                                     invokeRefreshData,
+
+                                     // editButtonAvailable,
+                                     // setShowMenu,
+                                     // showMenu,
+                                     // contentMode,
+                                     // setContentMode,
+                                     // saveHtml,
+                                     // saveHtmlAvailable,
+                                     // selectedPageId,
+                                     // selectedPageTitle,
+                                     // selectedPageSetTitle,
+}) => {
     const [addMode, setAddMode] = useState(false)
     const [newTitle, setNewTitle] = useState("")
     const [showSpaceOptions, setShowSpaceOptions] = useState(false)
@@ -20,15 +36,15 @@ export const PanelActionsComp = ({editButtonAvailable, setShowMenu, showMenu, in
     }
 
     const renamePageTitleHandler = (newTitle) => {
-        renamePage(selectedPageId, newTitle, () => {selectedPageSetTitle(newTitle); invokeRefreshData()})
+        renamePage(currentPage.id, newTitle, () => {currentPage.setTitle(newTitle); invokeRefreshData()})
     }
 
     // button "show/hide menu"
     const drawButton_showMenu = () => <div className={style.buttonWrapper}>
         <ActionButtonComp
             icon={ICONS.menu}
-            onClick={()=>setShowMenu(!showMenu)}
-            isPressed={showMenu}
+            onClick={()=>pageList.setShowMenu(!pageList.showMenu)}
+            isPressed={pageList.showMenu}
         />
     </div>
 
@@ -43,25 +59,29 @@ export const PanelActionsComp = ({editButtonAvailable, setShowMenu, showMenu, in
 
 
     const drawTitle = () => <div className={style.titleWrapper}>
-        {selectedPageId && !addMode && <InputTextTransparentComp
-            defaultText={selectedPageTitle}
+        {currentPage.id && !addMode && <InputTextTransparentComp
+            defaultText={currentPage.title}
             acceptChanges={renamePageTitleHandler}
         />}
     </div>
 
     const drawRightPart = () => <div className={style.rightPanelPart}>
         {
-            saveHtmlAvailable &&
+            currentPage.html !== currentPage.tmpHtml &&
             <ActionButtonComp   // button Save
                 icon={ICONS.save}
-                onClick={()=>saveHtml()}
+                onClick={() => sendSaveHtml(currentPage)}
             />
         }
         {
-            editButtonAvailable &&
+            currentPage.contentStatus === INFO_STATUS.ACTUAL &&
             <ActionButtonComp   // button Edit Page
                 text={str("Edit Page")}
-                onClick={() => setContentMode(contentMode === TEXT_MODE.EDIT ? TEXT_MODE.NORMAL : TEXT_MODE.EDIT)}/>
+                onClick={ () => currentPage.setContentMode(
+                    currentPage.contentMode === TEXT_MODE.EDIT
+                        ? TEXT_MODE.NORMAL
+                        : TEXT_MODE.EDIT) }
+            />
         }
     </div>
 
@@ -88,7 +108,7 @@ export const PanelActionsComp = ({editButtonAvailable, setShowMenu, showMenu, in
                         icon={ICONS.check}
                         onClick={()=>{
                             if (!!newTitle) {
-                                createPage(newTitle, selectedPageId, invokeRefreshData)
+                                createPage(newTitle, currentPage.id, invokeRefreshData)
                                 setNewTitle("")
                                 setAddMode(false)
                             }
@@ -113,7 +133,7 @@ export const PanelActionsComp = ({editButtonAvailable, setShowMenu, showMenu, in
                 <ActionButtonComp
                     icon={ICONS.plus}
                     text={str("New page")}
-                    onClick={()=>setAddMode(true)}
+                    onClick={() => setAddMode(true)}
                 />
             </div>
             {drawTitle()}

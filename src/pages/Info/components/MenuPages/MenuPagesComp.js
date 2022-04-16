@@ -4,18 +4,21 @@ import {MenuItemComp} from "./MenuItem/MenuItemComp";
 import {movePage} from "./MenuPagesActions";
 import {str} from "../../../../common/Language";
 
-export const MenuPagesComp = ({pages, location, refresh, setPages}) => {
+export const MenuPagesComp = ({   pageList,
+                                  currentPage,
+                                  location,
+}) => {
     const [currentDraggableElement, setCurrentDraggableElement] = useState()
     const [currentDragOverElement, setCurrentDragOverElement] = useState()
 
     const params = {
         location: location,
-        refreshPage: refresh.page,
+        refreshPage: currentPage.refresh,
         currentDraggableElement: currentDraggableElement,
         setCurrentDraggableElement: setCurrentDraggableElement,
         currentDragOverElement: currentDragOverElement,
         setCurrentDragOverElement: setCurrentDragOverElement,
-        movePage: (from, to) => movePage(from['id'], to['id'], refresh.menu),
+        movePage: (from, to) => movePage(from['id'], to['id'], pageList.refresh),
     }
 
     return <div className={style.wrapper}>
@@ -23,7 +26,7 @@ export const MenuPagesComp = ({pages, location, refresh, setPages}) => {
             element={{id: -1, title: str("Root"), parentId: null}}
             params={params}
         />
-        {pages.map(el => <MenuItemComp
+        {pageList.pages.map(el => <MenuItemComp
             key={el['id']}
             element={el}
             params={params}

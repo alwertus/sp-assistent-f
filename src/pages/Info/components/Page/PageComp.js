@@ -1,21 +1,22 @@
 import React from "react";
 import style from "./Page.module.css";
 import {RichTextEditorComp} from "../../../../components/RichTextEditor/RichTextEditorComp";
-import {INFO_STATUS} from "../../../../common/Structures";
+import {INFO_STATUS, TEXT_MODE} from "../../../../common/Structures";
 import {str} from "../../../../common/Language";
 
-export const PageComp = ({html, setHtml, isEditMode, contentStatus, id}) => {
+export const PageComp = ({currentPage}) => {
+    const isEditMode = currentPage.contentMode === TEXT_MODE.EDIT
 
-    if (!id)
+    if (!currentPage.id)
         return <div className={style.innerWrapper}>{str("Select Page")}</div>
 
-    if (contentStatus === INFO_STATUS.ACTUAL && !!id)
+    if (currentPage.contentStatus === INFO_STATUS.ACTUAL && !!currentPage.id)
         return <div className={style.wrapper}>
             {isEditMode && <RichTextEditorComp
-                html={html}
-                setHtml={setHtml}
+                html={currentPage.html}
+                setHtml={currentPage.setHtml}
             />}
-            {!isEditMode && <div className={style.innerWrapper} dangerouslySetInnerHTML={{__html: html}}/>}
+            {!isEditMode && <div className={style.innerWrapper} dangerouslySetInnerHTML={{__html: currentPage.html}}/>}
         </div>
 
     else
