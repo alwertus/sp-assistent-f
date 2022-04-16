@@ -7,7 +7,6 @@ import {str} from "../../../../common/Language";
 import {createPage, renamePage} from "./PanelActionsActions";
 import {INFO_STATUS, TEXT_MODE} from "../../../../common/Structures";
 import {InputTextTransparentComp} from "../../../../components/InputTextTransparent/InputTextTransparentComp";
-import {SpaceOptionsWindowComp} from "../SpaceOptionsWindow/SpaceOptionsWindowComp";
 import {sendSaveHtml} from "../../InfoActions";
 
 export const PanelActionsComp = ({   pageList,
@@ -17,12 +16,6 @@ export const PanelActionsComp = ({   pageList,
 
     const [addMode, setAddMode] = useState(false)
     const [newTitle, setNewTitle] = useState("")
-    const [showSpaceOptions, setShowSpaceOptions] = useState(false)
-
-    const closeWindowHandler = () => {
-        setShowSpaceOptions(false)
-        // TODO: Тут вызвать событие, чтоб обновить список пространства (в случае переименования заголовка)
-    }
 
     const renamePageTitleHandler = (newTitle) => {
         renamePage(currentPage.id, newTitle, () => {currentPage.setTitle(newTitle); invokeRefreshData()})
@@ -36,16 +29,6 @@ export const PanelActionsComp = ({   pageList,
             isPressed={pageList.showMenu}
         />
     </div>
-
-    // button "space options"
-    const drawButton_spaceOptions = () => <div className={style.buttonWrapper}>
-        <ActionButtonComp
-            icon={ICONS.options}
-            onClick={()=>setShowSpaceOptions(!showSpaceOptions)}
-            isPressed={showSpaceOptions}
-        />
-    </div>
-
 
     const drawTitle = () => <div className={style.titleWrapper}>
         {currentPage.id && !addMode && <InputTextTransparentComp
@@ -111,13 +94,8 @@ export const PanelActionsComp = ({   pageList,
         </div>
 
         : <div className={style.wrapper}>
-            {showSpaceOptions &&
-                <SpaceOptionsWindowComp
-                    closeWindowHandler={closeWindowHandler}
-                />
-            }
+
             {drawButton_showMenu()}
-            {drawButton_spaceOptions()}
             <div className={style.newPageWrapper}>
                 <ActionButtonComp
                     icon={ICONS.plus}

@@ -8,6 +8,7 @@ import {INFO_STATUS} from "../../../../common/Structures";
 import {str} from "../../../../common/Language";
 import {useSelector} from "react-redux";
 import {useNavigate} from "react-router";
+import {SpaceOptionsWindowComp} from "../SpaceOptionsWindow/SpaceOptionsWindowComp";
 
 export const SpacesComp = ({refreshData, location}) => {
     useSelector(state => state['currentLanguage']) // add this to refresh component if lang is changed
@@ -18,6 +19,21 @@ export const SpacesComp = ({refreshData, location}) => {
     const [addMode, setAddMode] = useState(false)
     const [spaceTitle, setSpaceTitle] = useState("")
     const [spaceDescription, setSpaceDescription] = useState("")
+    const [showSpaceOptions, setShowSpaceOptions] = useState(false)
+
+    const closeWindowHandler = () => {
+        setShowSpaceOptions(false)
+        // TODO: Тут вызвать событие, чтоб обновить список пространства (в случае переименования заголовка)
+    }
+
+    // button "space options"
+    const drawButton_spaceOptions = () => <div className={style.buttonWrapper}>
+        <ActionButtonComp
+            icon={ICONS.options}
+            onClick={()=>setShowSpaceOptions(!showSpaceOptions)}
+            isPressed={showSpaceOptions}
+        />
+    </div>
 
     const refreshLocation = () => {
         navigate("/" + location)
@@ -59,6 +75,11 @@ export const SpacesComp = ({refreshData, location}) => {
             />
         </div>
         : <div className={style.wrapper}>
+            {showSpaceOptions &&
+                <SpaceOptionsWindowComp
+                    closeWindowHandler={closeWindowHandler}
+                />
+            }
             <span>{str("Space")}:</span>
             <select
                 className={style.select}
@@ -72,6 +93,8 @@ export const SpacesComp = ({refreshData, location}) => {
                 && spaces.map(e => <option key={e.id} value={e.id}>{e.title}</option>)
                 }
             </select>
+
+            {drawButton_spaceOptions()}
 
             <ActionButtonComp
                 icon={ICONS.plus}
