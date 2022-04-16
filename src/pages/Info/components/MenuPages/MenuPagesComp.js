@@ -21,12 +21,20 @@ export const MenuPagesComp = ({   pageList,
         movePage: (from, to) => movePage(from['id'], to['id'], pageList.refresh),
     }
 
+    const sortComparator = (a, b) => {
+        const A = a['title'].toUpperCase()
+        const B = b['title'].toUpperCase()
+        if (A < B) return -1
+        if (A > B) return 1
+        return 0
+    }
+
     return <div className={style.wrapper}>
         <MenuItemComp
             element={{id: -1, title: str("Root"), parentId: null}}
             params={params}
         />
-        {pageList.pages.map(el => <MenuItemComp
+        {pageList.pages.sort(sortComparator).map(el => <MenuItemComp
             key={el['id']}
             element={el}
             params={params}

@@ -10,22 +10,11 @@ import {InputTextTransparentComp} from "../../../../components/InputTextTranspar
 import {SpaceOptionsWindowComp} from "../SpaceOptionsWindow/SpaceOptionsWindowComp";
 import {sendSaveHtml} from "../../InfoActions";
 
-export const PanelActionsComp = ({
-                                     pageList,
+export const PanelActionsComp = ({   pageList,
                                      currentPage,
                                      invokeRefreshData,
-
-                                     // editButtonAvailable,
-                                     // setShowMenu,
-                                     // showMenu,
-                                     // contentMode,
-                                     // setContentMode,
-                                     // saveHtml,
-                                     // saveHtmlAvailable,
-                                     // selectedPageId,
-                                     // selectedPageTitle,
-                                     // selectedPageSetTitle,
 }) => {
+
     const [addMode, setAddMode] = useState(false)
     const [newTitle, setNewTitle] = useState("")
     const [showSpaceOptions, setShowSpaceOptions] = useState(false)

@@ -37,6 +37,7 @@ export const InfoComp = ({setHeader, setFooterText, location}) => {
                 currentPage={currentPage}
                 invokeRefreshData={refreshAll}
             />
+
             <div className={style.page}>
 
                 {/* Draw menu */}
@@ -55,10 +56,9 @@ export const InfoComp = ({setHeader, setFooterText, location}) => {
 
                 {/* Draw page */}
                 <div className={style.content}>
-                    <PageComp
-                        currentPage={currentPage}
-                    />
+                    <PageComp currentPage={currentPage} />
                 </div>
+
             </div>
         </div>
     </div>

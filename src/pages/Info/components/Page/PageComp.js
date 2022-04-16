@@ -14,7 +14,7 @@ export const PageComp = ({currentPage}) => {
         return <div className={style.wrapper}>
             {isEditMode && <RichTextEditorComp
                 html={currentPage.html}
-                setHtml={currentPage.setHtml}
+                setHtml={currentPage.setTmpHtml}
             />}
             {!isEditMode && <div className={style.innerWrapper} dangerouslySetInnerHTML={{__html: currentPage.html}}/>}
         </div>
