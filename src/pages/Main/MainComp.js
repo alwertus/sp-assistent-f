@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import style from "./Main.module.css";
-import {TempDrawComp} from "../../delme/TempDraw/TempDrawComp";
+import {str} from "../../common/Language.js";
 
 export const MainComp = props => {
     const setHeader = props['setHeader']
@@ -8,7 +8,6 @@ export const MainComp = props => {
     useEffect(() => setHeader(""), [])
 
     return <div className={style.wrapper}>
-        <h2>MAIN</h2>
-        <TempDrawComp/>
+        <h2>{str("News")}</h2>
     </div>
 }

@@ -5,6 +5,7 @@ const structure = {
     // separate on big parts
     "common" : {
         "":{                                    "ru":""},
+        "News":{                                "ru":"Новости"},
         "Personal Data":{                       "ru":"Личные данные"},
         "Save":{                                "ru":"Сохранить"},
         "First name":{                          "ru":"Имя"},
