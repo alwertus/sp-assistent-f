@@ -2,8 +2,6 @@ import {INFO_STATUS} from "../../common/Structures";
 import {sendMsg} from "../../common/SendMsg";
 
 export function getPageList(pageList) {
-// export function getPageList(setPagesHandler, setMenuStatus) {
-
     if (pageList.menuStatus !== INFO_STATUS.OUTDATED) return
 
     pageList.setMenuStatus(INFO_STATUS.WAITING)
@@ -27,12 +25,15 @@ export function getHtml(currentPage) {
         () => currentPage.setContentStatus(INFO_STATUS.ERROR))
 }
 
-export function sendSaveHtml(currentPage) {
-    if (!currentPage.id || currentPage.tmpHtml === currentPage.html) return
+export function sendSaveHtml(id, html, tmpHtml, setHtml, runAfterSave = () => {}) {
+    if (!id || tmpHtml === html) return
     sendMsg("api/info/saveHtml",
         {
-            id: currentPage.id,
-            html: currentPage.tmpHtml
+            id: id,
+            html: tmpHtml
         },
-        () => currentPage.setHtml(currentPage.tmpHtml))
+        () => {
+            setHtml(tmpHtml)
+            runAfterSave()
+        })
 }

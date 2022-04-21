@@ -7,7 +7,6 @@ import {str} from "../../../../common/Language";
 import {createPage, renamePage} from "./PanelActionsActions";
 import {INFO_STATUS, TEXT_MODE} from "../../../../common/Structures";
 import {InputTextTransparentComp} from "../../../../components/InputTextTransparent/InputTextTransparentComp";
-import {sendSaveHtml} from "../../InfoActions";
 
 export const PanelActionsComp = ({   pageList,
                                      currentPage,
@@ -39,16 +38,17 @@ export const PanelActionsComp = ({   pageList,
 
     const drawRightPart = () => <div className={style.rightPanelPart}>
         {
-            currentPage.html !== currentPage.tmpHtml &&
+            currentPage.needToSave &&
             <ActionButtonComp   // button Save
                 icon={ICONS.save}
-                onClick={() => sendSaveHtml(currentPage)}
+                onClick={() => currentPage.save()}
             />
         }
         {
             currentPage.contentStatus === INFO_STATUS.ACTUAL &&
             <ActionButtonComp   // button Edit Page
                 text={str("Edit Page")}
+                isPressed={currentPage.contentMode === TEXT_MODE.EDIT}
                 onClick={ () => currentPage.setContentMode(
                     currentPage.contentMode === TEXT_MODE.EDIT
                         ? TEXT_MODE.NORMAL

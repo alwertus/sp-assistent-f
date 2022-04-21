@@ -1,3 +1,9 @@
+import style from "./Icons.module.css"
+import insertColumn from "./img/insert-column.svg"
+import deleteColumn from "./img/delete-column.svg"
+import tableIcon from "./img/Table.png"
+import expand from "./img/chevron-expand.svg"
+
 export const ICONS = {
     menu: <svg
         focusable="false"
@@ -45,8 +51,14 @@ export const ICONS = {
         viewBox="0 0 24 24" data-testid="MenuIcon">
         <path d=""/>
     </svg>,
-
-
+    TableColumnInsertRight: <img className={style.image} src={insertColumn} alt={"alt"}/>,
+    TableColumnInsertLeft: <img className={style.image} src={insertColumn} alt={"alt"} style={{transform:"rotate(180deg)"}}/>,
+    TableColumnInsertUp: <img className={style.image} src={insertColumn} alt={"alt"} style={{transform:"rotate(-90deg)"}}/>,
+    TableColumnInsertDown: <img className={style.image} src={insertColumn} alt={"alt"} style={{transform:"rotate(90deg)"}}/>,
+    TableDeleteColumn: <img className={style.image} src={deleteColumn} alt={"alt"}/>,
+    TableDeleteRow: <img className={style.image} src={deleteColumn} alt={"alt"} style={{transform:"rotate(-90deg)"}}/>,
+    Table: <img className={style.image} src={tableIcon} alt={"alt"}/>,
+    ShowCode: <img className={style.image} src={expand} alt={"alt"} style={{transform:"rotate(-90deg)"}}/>,
 
 
     menu2: <svg preserveAspectRatio="none">

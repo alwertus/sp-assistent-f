@@ -2,4 +2,56 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    overflow-y: hidden;
+}
+
+.controlPanel {
+    display: flex;
+    padding: 2px;
+    height: 30px;
+    align-items: center;
+}
+.buttonGroup {
+    display: flex;
+    margin: 0 6px;
+}
+.button {
+    margin: 0 1px;
+}
+
+.workSpace {
+    flex: 1;
+    padding: 3px;
+    margin: 2px;
+    overflow-y: scroll;
+}
+.needToSave {
+    outline: 2px solid #f330306b;
+}
+.notNeedToSave {
+    outline: 2px solid #76f66d6b;
+}
+.workSpace td {
+    border: 1px solid #c1c1c1;
+    min-width: 1em;
+    padding: 2px 3px;
+}
+.r1 {
+    transform: rotate(90deg);
+}
+.r2 {
+    transform: rotate(-90deg);
+}
+.r3 {
+    transform: rotate(180deg);
+}
+.hidden {
+    display: none;
+}
+.rawText {
+    /*display: flex;*/
+    /*flex: 1;*/
+    resize: none;
+    width: 98%;
+    height: 98%;
 }

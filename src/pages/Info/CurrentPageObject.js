@@ -1,6 +1,6 @@
 import {INFO_STATUS, TEXT_MODE} from "../../common/Structures";
 import {useEffect, useState} from "react";
-import {getHtml} from "./InfoActions";
+import {getHtml, sendSaveHtml} from "./InfoActions";
 
 export const CurrentPageObject = (id) => {
     const [contentStatus, setContentStatus] = useState(INFO_STATUS.OUTDATED)
@@ -8,6 +8,11 @@ export const CurrentPageObject = (id) => {
     const [tmpHtml, setTmpHtml] = useState("")
     const [html, sHtml] = useState("")
     const [title, setTitle] = useState("")
+
+    const setHtml = (newValue) => {
+        sHtml(newValue)
+        setTmpHtml(newValue)
+    }
 
     const thisObj = {
         id: id,
@@ -18,16 +23,18 @@ export const CurrentPageObject = (id) => {
         title: title,
         setTitle: setTitle,
         html: html,
-        setHtml: (newValue) => {
-            sHtml(newValue)
-            setTmpHtml(newValue)
-        },
+        setHtml: setHtml,
         tmpHtml: tmpHtml,
         setTmpHtml: setTmpHtml,
-        refresh: () => setContentStatus(INFO_STATUS.OUTDATED)
+        refresh: () => setContentStatus(INFO_STATUS.OUTDATED),
+        save: (f) => sendSaveHtml(id, html, tmpHtml, setHtml, f),
+        needToSave: html !== tmpHtml
     }
 
-    useEffect(() => { getHtml(thisObj) }, [contentStatus, id]) // eslint-disable-line react-hooks/exhaustive-deps
+    useEffect(() => {
+        getHtml(thisObj)
+        setContentMode(TEXT_MODE.NORMAL)
+    }, [contentStatus, id]) // eslint-disable-line react-hooks/exhaustive-deps
 
     return thisObj
 }

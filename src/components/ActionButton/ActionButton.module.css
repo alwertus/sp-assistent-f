@@ -9,6 +9,7 @@
 }
 .isPressed {
     fill: #f5f1f1;
+    background-color: #74dcc4ba;
 }
 .isNotPressed {
     fill: #595858;

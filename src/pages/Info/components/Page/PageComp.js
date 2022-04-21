@@ -13,8 +13,7 @@ export const PageComp = ({currentPage}) => {
     if (currentPage.contentStatus === INFO_STATUS.ACTUAL && !!currentPage.id)
         return <div className={style.wrapper}>
             {isEditMode && <RichTextEditorComp
-                html={currentPage.html}
-                setHtml={currentPage.setTmpHtml}
+                currentPage={currentPage}
             />}
             {!isEditMode && <div className={style.innerWrapper} dangerouslySetInnerHTML={{__html: currentPage.html}}/>}
         </div>
