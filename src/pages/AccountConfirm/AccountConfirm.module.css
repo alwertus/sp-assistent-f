@@ -1,0 +1,45 @@
+.wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.centerContainer {
+    /*border: 1px solid black;*/
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.line {
+    display: flex;
+    justify-content: center;
+}
+.loading {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: 2s linear 0s infinite alternate rotate_cycle;
+}
+.success {
+    color: green;
+}
+.error {
+    color: red;
+}
+@keyframes rotate_cycle {
+    0% {
+        margin-left: -50px;
+        transform: rotate(360deg) scale(0.2);
+    }
+    50% {
+        margin-left: 0;
+        transform: rotate(0deg) scale(1.6);
+    }
+    100% {
+        margin-left: 50px;
+        transform: rotate(-360deg) scale(0.2);
+    }
+}

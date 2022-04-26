@@ -22,6 +22,7 @@
     width: 20px;
     display: flex;
     justify-content: center;
+    align-items: center
 }
 .collapseIcon {
     transform: rotate(90deg);

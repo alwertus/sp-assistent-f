@@ -3,6 +3,7 @@ import insertColumn from "./img/insert-column.svg"
 import deleteColumn from "./img/delete-column.svg"
 import tableIcon from "./img/Table.png"
 import expand from "./img/chevron-expand.svg"
+import loading from "./img/loading.svg"
 
 export const ICONS = {
     menu: <svg
@@ -51,6 +52,13 @@ export const ICONS = {
         viewBox="0 0 24 24" data-testid="MenuIcon">
         <path d=""/>
     </svg>,
+    dot: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              focusable="false"
+              viewBox="0 0 16 16">
+        <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+    </svg>,
+    loading: <img className={style.image} src={loading} alt={"alt"}/>,
+
     TableColumnInsertRight: <img className={style.image} src={insertColumn} alt={"alt"}/>,
     TableColumnInsertLeft: <img className={style.image} src={insertColumn} alt={"alt"} style={{transform:"rotate(180deg)"}}/>,
     TableColumnInsertUp: <img className={style.image} src={insertColumn} alt={"alt"} style={{transform:"rotate(-90deg)"}}/>,

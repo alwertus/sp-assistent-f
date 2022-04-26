@@ -32,18 +32,14 @@ export function getUserInfo(setLogin, setFirstName, setLastName, setUserInfo) {
         if (!!setUserInfo) setUserInfo(newUser)
     },()=>{})
 }
-export function register(user, password, setLoginStatus, setErrorText) {
-    console.log("register with " + user + " - " + password)
+export function register(user, password, setLoginStatus, setErrorText, successRegisterHandler) {
     sendMsg("api/user/register", {
         login: user,
         password: password
     }, () => {
-        getToken(user, password, setLoginStatus, setErrorText)
-        // setLoginStatus(LOGIN_STATUS.AUTHORIZED)
-        // setLocalStorageValue(API_RQ.TOKEN, rs[API_RQ.TOKEN])
+        successRegisterHandler()
     },(err) => {
         setLoginStatus(LOGIN_STATUS.ERROR)
-        // setLocalStorageValue(API_RQ.TOKEN, "")
         setErrorText(str(err))
     })
 }

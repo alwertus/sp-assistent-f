@@ -28,6 +28,11 @@ export const LoginComp = props => {
     const setUserInfo = props['setUserInfo']
     const [btnSave_Active, setBtnSave_Active] = useState(true)
 
+    const successRegisterHandler = () => {
+        alert(str("Account success created. Check your email to confirm"))
+        setIsRegister(false)
+    }
+
     const onClickLogin = () => {
         setLoginStatus(LOGIN_STATUS.WAITING)
         getToken(login, password, setLoginStatus, setErrorText)
@@ -40,7 +45,7 @@ export const LoginComp = props => {
             return
         }
         setLoginStatus(LOGIN_STATUS.WAITING)
-        register(login, password, setLoginStatus, setErrorText)
+        register(login, password, setLoginStatus, setErrorText, successRegisterHandler)
     }
 
     const onClickLogout = () => {
@@ -185,7 +190,7 @@ export const LoginComp = props => {
             <div className={style.inputSection}>
                 <div className={style.inputLine}>
                     <div className={style.inputLeftPart}>
-                        {str("user")}
+                        {str("email")}
                     </div>
                     <div className={style.inputRightPart}>
                         <InputTextComp

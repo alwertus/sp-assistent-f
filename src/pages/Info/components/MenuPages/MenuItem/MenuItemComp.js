@@ -79,7 +79,7 @@ export const MenuItemComp = ({element, params}) => {
                 {ICONS.AngleBracket}
             </div>
         } else {
-            return <div className={style.prefixContainer}>&#128900;</div>
+            return <div className={style.prefixContainer}>{ICONS.dot}</div>
         }
     }
 

@@ -13,6 +13,7 @@ import {MenuTabComp} from "../components/MenuTab/MenuTabComp";
 import imgAccount from "../common/img/account.svg";
 import {getLocalStorageValue} from "../common/LocalStorage";
 import {getUserInfo} from "../pages/Login/LoginActions";
+import {AccountConfirmComp} from "../pages/AccountConfirm/AccountConfirmComp";
 
 
 const App = () => {
@@ -78,6 +79,16 @@ const App = () => {
                 setUserInfo={setUserInfo}
                 // setIsLoggedIn={setIsLoggedIn}
             />
+        },
+        {
+            key:"emailConfirm/:secret",
+            routeOnly:true,
+            available:true,
+            title:userInfo.firstName,
+            image: imgAccount,
+            rightMenu: true,
+            textFirst: true,
+            comp:<AccountConfirmComp/>
         },
     ]
 
