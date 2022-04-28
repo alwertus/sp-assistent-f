@@ -1,6 +1,8 @@
 .wrapper {
     display: flex;
     flex: 1;
+    position: relative;
+    margin-top: 14px;
 }
 .input {
     flex: 1;
@@ -16,11 +18,30 @@
     background-color: #00000009;
 }
 .expressive {
-    background-color: #00000040;
+    background-color: #bbbbbb;
 }
 .expressive:focus {
-    background-color: #00000060;
+    background-color: #a4a4a4;
 }
 .buttonWrapper {
     margin-left: 3px;
+}
+.title {
+    position: absolute;
+    color: #5d5b5b;
+    left: 5px;
+    font-size: 0.8em;
+    pointer-events: none;
+    padding: 2px;
+    border-radius: 4px;
+}
+.titleNormal {
+    top: 8px;
+    background-color: transparent !important;
+    transition: top 0.3s, color 0.5s;
+}
+.titleRaise {
+    top: -12px;
+    color: #343434;
+    transition: top 0.3s, color 0.5s;
 }

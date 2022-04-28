@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import style from "./InputTextTransparent.module.css";
-import {str} from "../../common/Language";
 import {ActionButtonComp} from "../ActionButton/ActionButtonComp";
 import {ICONS} from "../../common/Icons";
 
@@ -11,41 +10,42 @@ export const InputTextTransparentComp = ({   defaultText,
                                              expressive,
                                              onChange = () => {},
                                              clearAfterAccept = false,
+                                             title = "",
+                                             className = "",
                                          }) => {
+
+    const expensiveStyle = !!expressive ? " " + style.expressive : ""
     const [text, setText] = useState(defaultText)
+    const [placeholderRaise, setPlaceholderRaise] = useState(defaultText !== "")
 
     const calcStyle = {
         fontSize: fontSize,
     }
 
-    const onChangeHandler = (e) => {
-        setText(e.target.value)
-        onChange(e.target.value)
+    const changeText = (newVal) => {
+        setText(newVal)
+        onChange(newVal)
+        setPlaceholderRaise(newVal !== "")
     }
 
     const acceptChangesHandler = () => {
         if (defaultText !== text)
             acceptChanges(text)
-        if (clearAfterAccept) {
-            setText("")
-            onChange("")
-        }
-    }
-    const cancelChangesHandler = () => {
-        setText(defaultText)
-        onChange(defaultText)
+
+        if (clearAfterAccept)
+            changeText("")
     }
 
     useEffect(() => {
-        setText(defaultText)
+        changeText(defaultText)
     }, [defaultText])
 
 
-    return <div className={style.wrapper}>
+    return <div className={style.wrapper + " " + className}>
         <input style={calcStyle}
-               className={style.input + (!!expressive ? " " + style.expressive : "")}
+               className={style.input + expensiveStyle}
                value={text}
-               onChange={onChangeHandler}
+               onChange={(e) => changeText(e.target.value)}
                onBlur={() => {
                    if (saveOnLeave) acceptChangesHandler()
                }}
@@ -53,10 +53,14 @@ export const InputTextTransparentComp = ({   defaultText,
                    if (e.key === 'Enter')
                        acceptChangesHandler();
                    if (e.key === 'Escape')
-                       cancelChangesHandler();
+                       changeText(defaultText);
 
                }}
         />
+        <div className={style.title + expensiveStyle + " " + (placeholderRaise ? style.titleRaise : style.titleNormal)}>
+            {title}
+        </div>
+
         {!saveOnLeave && !!text && <div className={style.buttonWrapper}>
             <ActionButtonComp icon={ICONS.check}
                               onClick={acceptChangesHandler} />

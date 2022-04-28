@@ -40,11 +40,6 @@ export const SpaceOptionsWindowComp = ({closeWindowHandler = () => {}}) => {
 
     useEffect(refreshHandler ,[])
 
-    const drawOptionLine = (title, value) => <div className={style.line}>
-        <div className={style.columnSizeX1}>{title}</div>
-        <div className={style.columnSizeX3}>{value}</div>
-    </div>
-
     return <div id={"OuterArea"}
                 className={style.wrapper}
                 onClick={onClickOutTheWindow}>
@@ -55,27 +50,29 @@ export const SpaceOptionsWindowComp = ({closeWindowHandler = () => {}}) => {
             </div>
             <div className={style.center}>
 
-                {drawOptionLine(str("Title"), <InputTextTransparentComp
+                <InputTextTransparentComp
+                    title={str("Title")}
                     defaultText={title}
                     acceptChanges={onAcceptChangesHandler_title}
-                />)}
+                />
 
-                {drawOptionLine(str("Description"), <InputTextTransparentComp
+                <InputTextTransparentComp
+                    title={str("Description")}
                     defaultText={description}
                     acceptChanges={onAcceptChangesHandler_description}
-                />)}
+                />
+                <h3 className={style.access}>{str("Access")}</h3>
 
-                {drawOptionLine(<b>{str("Access")}</b>, <div/>)}
-
-                {!isReadOnly && drawOptionLine(str("Add Login") + ":", <div className={style.lineInputWrapper}>
+                {!isReadOnly && <div className={style.lineInputWrapper}>
                     <InputTextTransparentComp
+                        title={str("Add Login") + ":"}
                         defaultText={""}
                         acceptChanges={onAcceptChangesHandler_addLogin}
                         saveOnLeave={false}
                         expressive
                         clearAfterAccept
                     />
-                </div>)}
+                </div>}
                 <div className={style.accessListWrapper}>
                     {accessList.map(e => <SpaceOptionsWindowDraw_AccessLine
                         key={e['userId']}

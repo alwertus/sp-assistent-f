@@ -1,3 +1,11 @@
 .wrapper {
 
 }
+.tbl td {
+    border: 1px solid lightgray;
+    padding: 4px;
+}
+
+.inputWrapper {
+    margin: 10px;
+}
