@@ -8,7 +8,7 @@
 .controlPanel {
     display: flex;
     padding: 2px;
-    height: 30px;
+    height: 36px;
     align-items: center;
 }
 .buttonGroup {
@@ -36,21 +36,10 @@
     min-width: 1em;
     padding: 2px 3px;
 }
-.r1 {
-    transform: rotate(90deg);
-}
-.r2 {
-    transform: rotate(-90deg);
-}
-.r3 {
-    transform: rotate(180deg);
-}
 .hidden {
     display: none;
 }
 .rawText {
-    /*display: flex;*/
-    /*flex: 1;*/
     resize: none;
     width: 98%;
     height: 98%;

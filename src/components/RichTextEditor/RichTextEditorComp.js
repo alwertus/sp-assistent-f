@@ -48,12 +48,17 @@ export const RichTextEditorComp = ({currentPage}) => {
                     {
                         group.type === "exec" && group.buttons.map(e =>
                             <div key={group.groupId + e.key} className={style.button}>
-                                <button onClick={() => {
-                                    document.execCommand(e.command, false, e.value)
-                                    onInnerHtmlChangeHandler()
-                                    refWorkSpace.current.focus()
-                                }}> {e.title}
-                                </button>
+                                <ActionButtonComp
+                                    onClick={() => {
+                                        document.execCommand(e.command, false, e.value)
+                                        onInnerHtmlChangeHandler()
+                                        refWorkSpace.current.focus()
+                                    }}
+                                    icon={e.title}
+                                    tooltip={e.tooltip}
+                                />
+                                {/*<button onClick={}> {e.title}*/}
+                                {/*</button>*/}
                             </div>
                         )
                     }

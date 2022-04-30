@@ -1,5 +1,6 @@
 import {ICONS} from "../../common/Icons";
 import {getTableUnderCaret} from "../../common/CaretOperations";
+import {str} from "../../common/Language";
 
 function createTableColumn(refWorkSpace, onInnerHtmlChangeHandler, insertPlace) {
     let tbl = getTableUnderCaret()
@@ -39,37 +40,43 @@ export const controls = [
             {   key: 0,
                 title:'clear',
                 command: 'removeFormat',
-                value: ''
+                value: '',
             },
             {   key: 1,
-                title:'U',
+                title: ICONS.typeUnderline,
                 command: 'underline',
-                value: ''
+                value: '',
+                tooltip: str('Underline') + ' (Ctrl+U)',
             },
             {   key: 2,
-                title:'B',
+                title: ICONS.typeBold,
                 command: 'bold',
-                value: ''
+                value: '',
+                tooltip: str('Bold') + ' (Ctrl+B)',
             },
             {   key: 3,
-                title:'I',
+                title: ICONS.typeItalic,
                 command: 'italic',
-                value: ''
+                value: '',
+                tooltip: str('Italic') + ' (Ctrl+I)',
             },
             {   key: 5,
-                title:'<-',
+                title: ICONS.textLeft,
                 command: 'justifyLeft',
-                value: ''
+                value: '',
+                tooltip: str('Align-Left'),
             },
             {   key: 6,
-                title:'=',
+                title: ICONS.textCenter,
                 command: 'justifyCenter',
-                value: ''
+                value: '',
+                tooltip: str('Align-Center'),
             },
             {   key: 7,
-                title:'>',
+                title: ICONS.textRight,
                 command: 'justifyRight',
-                value: ''
+                value: '',
+                tooltip: str('Align-Right'),
             },
             {   key: 8,
                 title:'normal',

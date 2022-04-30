@@ -2,13 +2,16 @@ import React, {useEffect, useState} from "react";
 import style from "./InputTextTransparent.module.css";
 import {ActionButtonComp} from "../ActionButton/ActionButtonComp";
 import {ICONS} from "../../common/Icons";
+import {str} from "../../common/Language";
 
 export const InputTextTransparentComp = ({   defaultText,
                                              acceptChanges = () => {},
-                                             fontSize = "large",
-                                             saveOnLeave = true,
-                                             expressive,
+                                             cancelChanges = () => {},
+                                             autoFocus = false,
                                              onChange = () => {},
+                                             fontSize = "large",
+                                             hideOkBtn = true,
+                                             expressive,
                                              clearAfterAccept = false,
                                              title = "",
                                              className = "",
@@ -35,6 +38,10 @@ export const InputTextTransparentComp = ({   defaultText,
         if (clearAfterAccept)
             changeText("")
     }
+    const cancelChangesHandler = () => {
+        changeText(defaultText)
+        cancelChanges()
+    }
 
     useEffect(() => {
         changeText(defaultText)
@@ -43,17 +50,18 @@ export const InputTextTransparentComp = ({   defaultText,
 
     return <div className={style.wrapper + " " + className}>
         <input style={calcStyle}
+               autoFocus={autoFocus}
                className={style.input + expensiveStyle}
                value={text}
                onChange={(e) => changeText(e.target.value)}
                onBlur={() => {
-                   if (saveOnLeave) acceptChangesHandler()
+                   if (hideOkBtn) acceptChangesHandler()
                }}
                onKeyDown={(e) => {
                    if (e.key === 'Enter')
                        acceptChangesHandler();
                    if (e.key === 'Escape')
-                       changeText(defaultText);
+                       cancelChangesHandler();
 
                }}
         />
@@ -61,9 +69,11 @@ export const InputTextTransparentComp = ({   defaultText,
             {title}
         </div>
 
-        {!saveOnLeave && !!text && <div className={style.buttonWrapper}>
+        {!hideOkBtn && !!text && <div className={style.buttonWrapper}>
             <ActionButtonComp icon={ICONS.check}
-                              onClick={acceptChangesHandler} />
+                              onClick={acceptChangesHandler}
+                              tooltip={str("Ok")}
+            />
         </div>}
     </div>
 }

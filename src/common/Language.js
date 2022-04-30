@@ -48,17 +48,29 @@ const structure = {
         "Space":{                               "ru":"Пространство"},
         "New Space":{                           "ru":"Новое Пространство"},
         "Title":{                               "ru":"Заголовок"},
+        "Input new title":{                     "ru":"Введи новый заголовок"},
         "Description":{                         "ru":"Описание"},
         "New page":{                            "ru":"Новая страница"},
         "Select Page":{                         "ru":"Выбери страницу"},
         "Edit Page":{                           "ru":"Редактировать"},
         "Root":{                                "ru":"Корень"},
+        "Topic":{                               "ru":"Тема"},
         "Space options":{                       "ru":"Настройки пространства"},
         "Name":{                                "ru":"Наименование"},
         "Close":{                               "ru":"Закрыть"},
         "Access":{                              "ru":"Доступ"},
         "Add":{                                 "ru":"Добавить"},
         "Add Login":{                           "ru":"Добавить логин"},
+        "Hide menu":{                           "ru":"Скрыть меню"},
+        "Show menu":{                           "ru":"Показать меню"},
+
+// Rich editor
+        "Underline":{                           "ru":"Подчёркивание"},
+        "Bold":{                                "ru":"Жирный"},
+        "Italic":{                              "ru":"Курсив"},
+        "Align-Left":{                          "ru":"Выравнивание-Лево"},
+        "Align-Center":{                        "ru":"Выравнивание-Центр"},
+        "Align-Right":{                         "ru":"Выравнивание-Право"},
     }
 }
 

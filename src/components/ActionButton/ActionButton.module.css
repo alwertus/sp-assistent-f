@@ -6,6 +6,7 @@
     border-radius: 4px;
     user-select: none;
     cursor: pointer;
+    position: relative;
 }
 .isPressed {
     fill: #f5f1f1;
@@ -24,4 +25,32 @@
 }
 .text {
     margin: 0 3px;
+}
+/* tooltip position */
+.tooltipDown {
+    top: 40px;
+}
+.tooltipDownLeft {
+    top: 40px;
+    right: 0;
+}
+.tooltip {
+    position: absolute;
+    color: black;
+    padding: 6px;
+    border-radius: 4px;
+    background-color: #d3d083;
+    z-index: 100;
+    box-shadow: 3px 3px 9px #5a5a5a;
+}
+.wrapper .tooltip {
+    visibility: hidden;
+    opacity: 0;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
+    transition-property: opacity;
+}
+.wrapper:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
 }

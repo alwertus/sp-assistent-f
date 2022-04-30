@@ -1,13 +1,20 @@
 .wrapper {
     display: flex;
     flex-direction: row;
-    background-color: #d7dbdb;
-    padding: 3px;
+    /*background-color: #d0dbdb;*/
+    background: linear-gradient(#dbdbdb, #c9c9c9);
+    /*padding: 3px;*/
+    align-items: center;
+    height: 3.4em;
 }
 .titleWrapper {
     display: flex;
-    margin: 0 10px;
+    justify-content: center;
+    /*margin: 0 10px;*/
     flex: 1;
+}
+.titleContainer {
+    width: 50%;
 }
 .newTitle {
     display: flex;
@@ -19,7 +26,10 @@
 .rightPanelPart {
     display: flex;
     justify-content: flex-end;
-    flex: 1;
+    /*flex: 1;*/
+}
+.hidden {
+    visibility: hidden;
 }
 .newPageWrapper {
     margin-left: 5px;

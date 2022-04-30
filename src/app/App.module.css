@@ -9,7 +9,9 @@
   top: 0;
 }
 .header {
-  background-color: #a3d0ff;
+  /*background-color: #a3d0ff;*/
+  background: linear-gradient(#bcefff, #d9d9d9);
+  height: 2.6em;
   display: flex;
 }
 .headerStart {

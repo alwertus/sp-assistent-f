@@ -14,7 +14,6 @@ export const PanelActionsComp = ({   pageList,
 }) => {
 
     const [addMode, setAddMode] = useState(false)
-    const [newTitle, setNewTitle] = useState("")
 
     const renamePageTitleHandler = (newTitle) => {
         renamePage(currentPage.id, newTitle, () => {currentPage.setTitle(newTitle); invokeRefreshData()})
@@ -26,83 +25,84 @@ export const PanelActionsComp = ({   pageList,
             icon={ICONS.menu}
             onClick={()=>pageList.setShowMenu(!pageList.showMenu)}
             isPressed={pageList.showMenu}
+            tooltip={str(pageList.showMenu ? "Hide menu" : "Show menu")}
         />
     </div>
 
     const drawTitle = () => <div className={style.titleWrapper}>
-        {currentPage.id && !addMode && <InputTextTransparentComp
-            defaultText={currentPage.title}
-            acceptChanges={renamePageTitleHandler}
-        />}
+        <div className={style.titleContainer}>
+            {currentPage.id && !addMode && <InputTextTransparentComp
+                title={str("Topic")}
+                defaultText={currentPage.title}
+                acceptChanges={renamePageTitleHandler}
+                expressive
+            />}
+        </div>
     </div>
 
     const drawRightPart = () => <div className={style.rightPanelPart}>
         {
-            currentPage.needToSave &&
+            // currentPage.needToSave &&
             <ActionButtonComp   // button Save
+                className={currentPage.needToSave ? "" : style.hidden}
                 icon={ICONS.save}
+                tooltip={str("Save")}
+                tooltipPosition={"DownLeft"}
                 onClick={() => currentPage.save()}
             />
         }
-        {
-            currentPage.contentStatus === INFO_STATUS.ACTUAL &&
-            <ActionButtonComp   // button Edit Page
-                text={str("Edit Page")}
-                isPressed={currentPage.contentMode === TEXT_MODE.EDIT}
-                onClick={ () => currentPage.setContentMode(
-                    currentPage.contentMode === TEXT_MODE.EDIT
-                        ? TEXT_MODE.NORMAL
-                        : TEXT_MODE.EDIT) }
-            />
-        }
+
     </div>
 
     return addMode
         ? <div className={style.wrapper}>
+
             {drawButton_showMenu()}
+
             <div className={style.newPageWrapper}>
-                <div className={style.newTitle}>
-                    <InputTextComp  // input text (new page title)
-                        setText={setNewTitle}
-                        autoFocus={true}
-                    />
-                </div>
-
-                <div className={style.buttonWrapper}>
-                    <ActionButtonComp   // button Cancel
-                        icon={ICONS.cancel}
-                        onClick={()=>setAddMode(false)}
-                    />
-                </div>
-
-                <div className={style.buttonWrapper}>
-                    <ActionButtonComp   // button OK
-                        icon={ICONS.check}
-                        onClick={()=>{
-                            if (!!newTitle) {
-                                createPage(newTitle, currentPage.id, invokeRefreshData)
-                                setNewTitle("")
-                                setAddMode(false)
-                            }
-                        }}
-                    />
-                </div>
+                <InputTextTransparentComp
+                    title={str("Input new title")}
+                    autoFocus={true}
+                    defaultText={""}
+                    acceptChanges={(text)=>{
+                        if (!!text) {
+                            createPage(text, currentPage.id, invokeRefreshData)
+                            setAddMode(false)
+                        }
+                    }}
+                    cancelChanges={() => setAddMode(false)}
+                    hideOkBtn={false}
+                />
             </div>
 
             {drawTitle()}
+
             {drawRightPart()}
+
         </div>
 
         : <div className={style.wrapper}>
-
             {drawButton_showMenu()}
             <div className={style.newPageWrapper}>
                 <ActionButtonComp
-                    icon={ICONS.plus}
-                    text={str("New page")}
+                    icon={ICONS.filePlus}
+                    tooltip={str("New page")}
                     onClick={() => setAddMode(true)}
                 />
             </div>
+            {
+                currentPage.contentStatus === INFO_STATUS.ACTUAL &&
+                <ActionButtonComp   // button Edit Page
+                    icon={ICONS.fileEdit}
+                    tooltip={str("Edit Page")}
+                    // tooltipPosition={"DownLeft"}
+                    isPressed={currentPage.contentMode === TEXT_MODE.EDIT}
+                    onClick={ () => currentPage.setContentMode(
+                        currentPage.contentMode === TEXT_MODE.EDIT
+                            ? TEXT_MODE.NORMAL
+                            : TEXT_MODE.EDIT) }
+                />
+            }
             {drawTitle()}
             {drawRightPart()}
         </div>

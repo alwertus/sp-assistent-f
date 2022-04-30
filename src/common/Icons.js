@@ -4,6 +4,14 @@ import deleteColumn from "./img/delete-column.svg"
 import tableIcon from "./img/Table.png"
 import expand from "./img/chevron-expand.svg"
 import loading from "./img/loading.svg"
+import filePlus from "./img/file-plus.svg"
+import editDocument from "./img/pencil-square.svg"
+import typeBold from "./img/type-bold.svg"
+import typeItalic from "./img/type-italic.svg"
+import typeUnderline from "./img/type-underline.svg"
+import textLeft from "./img/text-left.svg"
+import textRight from "./img/text-right.svg"
+import textCenter from "./img/text-center.svg"
 
 export const ICONS = {
     menu: <svg
@@ -58,6 +66,14 @@ export const ICONS = {
         <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
     </svg>,
     loading: <img className={style.image} src={loading} alt={"alt"}/>,
+    filePlus: <img className={style.image} src={filePlus} alt={"alt"}/>,
+    fileEdit: <img className={style.image} src={editDocument} alt={"alt"}/>,
+    typeBold: <img className={style.image} src={typeBold} alt={"alt"}/>,
+    typeItalic: <img className={style.image} src={typeItalic} alt={"alt"}/>,
+    typeUnderline: <img className={style.image} src={typeUnderline} alt={"alt"}/>,
+    textLeft: <img className={style.image} src={textLeft} alt={"alt"}/>,
+    textRight: <img className={style.image} src={textRight} alt={"alt"}/>,
+    textCenter: <img className={style.image} src={textCenter} alt={"alt"}/>,
 
     TableColumnInsertRight: <img className={style.image} src={insertColumn} alt={"alt"}/>,
     TableColumnInsertLeft: <img className={style.image} src={insertColumn} alt={"alt"} style={{transform:"rotate(180deg)"}}/>,

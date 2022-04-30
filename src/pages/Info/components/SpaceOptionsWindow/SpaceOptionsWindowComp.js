@@ -68,7 +68,7 @@ export const SpaceOptionsWindowComp = ({closeWindowHandler = () => {}}) => {
                         title={str("Add Login") + ":"}
                         defaultText={""}
                         acceptChanges={onAcceptChangesHandler_addLogin}
-                        saveOnLeave={false}
+                        hideOkBtn={false}
                         expressive
                         clearAfterAccept
                     />
