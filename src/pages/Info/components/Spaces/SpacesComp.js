@@ -41,7 +41,7 @@ export const SpacesComp = ({refreshData, location}) => {
 
     useEffect(() => {if (status === INFO_STATUS.OUTDATED) {
         setStatus(INFO_STATUS.WAITING)
-        getSpaces(refreshData, setStatus, setSpaces, setSpace)
+        getSpaces(setStatus, setSpaces, setSpace)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }},[status])
 
