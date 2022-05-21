@@ -22,7 +22,8 @@ export const ActionButtonComp = ({   onClick,
                 onClick={onClick}
     >
         {!!text && <div className={style.text}>{text}</div>}
-        {icon}
+        {icon && <div className={style.img}>{icon}</div>}
+        {/*{icon}*/}
         {tooltip && <span className={style.tooltip + " " + style['tooltip' + tooltipPosition]}>{tooltip}</span>}
     </div>
 }

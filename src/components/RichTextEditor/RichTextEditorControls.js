@@ -2,7 +2,7 @@ import {ICONS} from "../../common/Icons";
 import {getTableUnderCaret} from "../../common/CaretOperations";
 import {str} from "../../common/Language";
 
-function createTableColumn(refWorkSpace, onInnerHtmlChangeHandler, insertPlace) {
+export function createTableColumn(refWorkSpace, onInnerHtmlChangeHandler, insertPlace) {
     let tbl = getTableUnderCaret()
     if (!tbl) return
 
@@ -16,7 +16,7 @@ function createTableColumn(refWorkSpace, onInnerHtmlChangeHandler, insertPlace) 
     onInnerHtmlChangeHandler()
 }
 
-function createTableRow(refWorkSpace, onInnerHtmlChangeHandler, insertPlace) {
+export function createTableRow(refWorkSpace, onInnerHtmlChangeHandler, insertPlace) {
     let tbl = getTableUnderCaret()
     if (!tbl) return
 
@@ -34,14 +34,19 @@ function createTableRow(refWorkSpace, onInnerHtmlChangeHandler, insertPlace) {
 }
 
 export const controls = [
+    {groupId: "g0",
+    type: "exec",
+    buttons: [
+        {   key: 0,
+            title: ICONS.erase,
+            command: 'removeFormat',
+            value: '',
+            tooltip: str("Clear format"),
+        },
+    ]},
     {   groupId: "g1",
         type: "exec",
         buttons: [
-            {   key: 0,
-                title:'clear',
-                command: 'removeFormat',
-                value: '',
-            },
             {   key: 1,
                 title: ICONS.typeUnderline,
                 command: 'underline',
@@ -79,90 +84,40 @@ export const controls = [
                 tooltip: str('Align-Right'),
             },
             {   key: 8,
-                title:'normal',
-                command: 'hea',
-                value: ''
+                title: ICONS.typeNormal,
+                command: 'formatBlock',
+                value: 'div',
+                tooltip: str("Normal text"),
             },
             {   key: 9,
-                title:'h2',
+                title: ICONS.typeH1,
                 command: 'formatBlock',
-                value: 'h2'
+                value: 'h1',
+                tooltip: str("Header") + " 1",
             },
             {   key: 10,
-                title:'h3',
+                title: ICONS.typeH2,
                 command: 'formatBlock',
-                value: 'h3'
+                value: 'h2',
+                tooltip: str("Header") + " 2",
             },
             {   key: 11,
-                title:'h3',
+                title: ICONS.typeH3,
                 command: 'formatBlock',
-                value: 'h3'
+                value: 'h3',
+                tooltip: str("Header") + " 3",
             },
-        ]
-    },
-    {   groupId: "g2",
-        type: "actionButton",
-        buttons: [
-            {   key: 1,
-                icon: ICONS.Table,
-                onClick: (refWorkSpace, onInnerHtmlChangeHandler) => {
-                    document.execCommand('insertHTML', false, '<table><tr><td><br></td></tr></table>')
-                    onInnerHtmlChangeHandler()
-                    refWorkSpace.current.focus()
-                }
+            {   key: 12,
+                title: ICONS.listUl,
+                command: 'insertUnorderedList',
+                value: '',
+                tooltip: str("Unordered list"),
             },
-            {   key: 2,
-                icon: ICONS.TableColumnInsertLeft,
-                onClick: (refWorkSpace, onInnerHtmlChangeHandler) =>
-                    createTableColumn(refWorkSpace, onInnerHtmlChangeHandler, "before")
-            },
-            {   key: 3,
-                icon: ICONS.TableDeleteColumn,
-                onClick: (refWorkSpace, onInnerHtmlChangeHandler) => {
-                    let tbl = getTableUnderCaret()
-                    if (!tbl) return
-
-                    // find cell position in row
-                    let cellRowPosition = tbl.currentColIndex
-
-                    if (tbl.columnCount > 1) {
-                        for (let i = tbl.rowsArray.length - 1; i >= 0; i--)
-                            tbl.rowsArray[i].deleteCell(cellRowPosition)
-                    } else {
-                        tbl.table.remove()
-                    }
-
-                    onInnerHtmlChangeHandler()
-                }
-            },
-            {   key: 4,
-                icon: ICONS.TableColumnInsertRight,
-                onClick: (refWorkSpace, onInnerHtmlChangeHandler) =>
-                    createTableColumn(refWorkSpace, onInnerHtmlChangeHandler, "after")
-            },
-            {   key: 5,
-                icon: ICONS.TableColumnInsertUp,
-                onClick: (refWorkSpace, onInnerHtmlChangeHandler) =>
-                    createTableRow(refWorkSpace, onInnerHtmlChangeHandler, "before")
-            },
-            {   key: 6,
-                icon: ICONS.TableDeleteRow,
-                onClick: (refWorkSpace, onInnerHtmlChangeHandler) => {
-                    let tbl = getTableUnderCaret()
-                    if (!tbl) return
-
-                    if (tbl.rowsArray.length === 1)
-                        tbl.table.remove()
-                    else
-                        tbl.table.deleteRow(tbl.currentRowIndex)
-
-                    onInnerHtmlChangeHandler()
-                }
-            },
-            {   key: 7,
-                icon: ICONS.TableColumnInsertDown,
-                onClick: (refWorkSpace, onInnerHtmlChangeHandler) =>
-                    createTableRow(refWorkSpace, onInnerHtmlChangeHandler, "after")
+            {   key: 13,
+                title: ICONS.listOl,
+                command: 'insertOrderedList',
+                value: '',
+                tooltip: str("Ordered list"),
             },
         ]
     },

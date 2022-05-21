@@ -1,10 +1,11 @@
 import React from "react";
 import style from "./DEL1Styl.module.css";
 
-export const НазваниеНовойКомпоненты = (props) => {
-    const МойТекст = props.МойТекст
+export const DEL1Comp = (props) => {
 
-    return <div className={style.wrapper}>
-        Какой-то текст
+    return <div>
+        <div className={style.wrapper}>
+
+        </div>
     </div>
 }

@@ -71,6 +71,20 @@ const structure = {
         "Align-Left":{                          "ru":"Выравнивание-Лево"},
         "Align-Center":{                        "ru":"Выравнивание-Центр"},
         "Align-Right":{                         "ru":"Выравнивание-Право"},
+        "Normal text":{                         "ru":"Обычный текст"},
+        "Header":{                              "ru":"Заголовок"},
+        "Unordered list":{                      "ru":"Неупорядоченный список"},
+        "Ordered list":{                        "ru":"Упорядоченный список"},
+        "Clear format":{                        "ru":"Очистить формат"},
+        "Insert row above":{                    "ru":"Вставить строку сверху"},
+        "Insert row below":{                    "ru":"Вставить строку снизу"},
+        "Insert column left":{                  "ru":"Вставить колонку слева"},
+        "Insert column right":{                 "ru":"Вставить колонку справа"},
+        "Insert table":{                        "ru":"Вставить таблицу"},
+        "Delete row":{                          "ru":"Удалить строку"},
+        "Delete column":{                       "ru":"Удалить колонку"},
+        "Code block":{                          "ru":"Блок кода"},
+
     }
 }
 
