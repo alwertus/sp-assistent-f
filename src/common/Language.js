@@ -85,6 +85,7 @@ const structure = {
         "Delete column":{                       "ru":"Удалить колонку"},
         "Code block":{                          "ru":"Блок кода"},
         "Image":{                               "ru":"Изображение"},
+        "Link":{                                "ru":"Ссылка"},
 
     }
 }

@@ -122,6 +122,11 @@ export const RichTextEditorComp = ({currentPage}) => {
             let file = e.target.files[0]
             uploadImage(currentPage.id, file)
         },
+        insertLink: () => {
+            let url = prompt("Enter the URL");
+            document.execCommand("createLink", false, url);
+            onInnerHtmlChangeHandler()
+        },
     }
 
     useEffect(() => {
@@ -162,11 +167,17 @@ export const RichTextEditorComp = ({currentPage}) => {
 
             {/* TABLE ACTIONS */}
             <div className={style.buttonGroup}
-                 onMouseEnter={() => setShowTablePopup(true)}>
+                 onMouseEnter={() => setShowTablePopup(true)}
+                 onMouseMove={() => setShowTablePopup(true)}
+            >
                 <ActionButtonComp
                     icon={ICONS.table}
                 />
                 <div className={style.tablePopupWrapper}>
+                    {
+                        showTablePopup && <div className={style.tableBackground}
+                                               onMouseMove={() => {setShowTablePopup(false)}} />
+                    }
                     {
                         showTablePopup && <div className={style.tablePopup}
                                                onMouseLeave={(e) => {
@@ -227,14 +238,15 @@ export const RichTextEditorComp = ({currentPage}) => {
             </div>
 
             <div className={style.buttonGroup}>
+                {/* INSERT CODE BLOCK */}
                 <div className={style.button}>
                     <ActionButtonComp
                         icon={ICONS.codeBlock}
                         onClick={onBtnClick.insertCodeBlock}
                         tooltip={str("Code block")}
                     />
-
                 </div>
+                {/* INSERT IMAGE */}
                 <div className={style.button}>
                     <input type="file"
                            onChange={onBtnClick.insertImageOnChange}
@@ -244,6 +256,14 @@ export const RichTextEditorComp = ({currentPage}) => {
                         icon={ICONS.fileImage}
                         onClick={onBtnClick.insertImageOpenDialogue}
                         tooltip={str("Image")}
+                    />
+                </div>
+                {/*  INSERT LINK  */}
+                <div className={style.button}>
+                    <ActionButtonComp
+                        icon={ICONS.link}
+                        onClick={onBtnClick.insertLink}
+                        tooltip={str("Link")}
                     />
                 </div>
             </div>

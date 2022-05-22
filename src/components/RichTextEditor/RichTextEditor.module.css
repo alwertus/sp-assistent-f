@@ -52,6 +52,15 @@
 .tablePopupWrapper {
     position: fixed;
 }
+.tableBackground {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: transparent;
+}
 .tablePopup {
     z-index: 100;
     position: relative;
