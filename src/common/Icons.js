@@ -20,6 +20,7 @@ import typeH2 from "./img/type-h2.svg"
 import typeH3 from "./img/type-h3.svg"
 import erase from "./img/eraser-fill.svg"
 import codeBlock from "./img/journal-code.svg"
+import fileImage from "./img/file-image.svg"
 
 export const ICONS = {
     menu: <svg
@@ -99,6 +100,7 @@ export const ICONS = {
     typeH3: <img className={style.image} src={typeH3} alt={"alt"}/>,
     erase: <img className={style.image} src={erase} alt={"alt"}/>,
     codeBlock: <img className={style.image} src={codeBlock} alt={"alt"}/>,
+    fileImage: <img className={style.image} src={fileImage} alt={"alt"}/>,
 
     tableColumnInsertRight: <img className={style.image} src={insertColumn} alt={"alt"}/>,
     tableColumnInsertLeft: <img className={style.image} src={insertColumn} alt={"alt"} style={{transform:"rotate(180deg)"}}/>,

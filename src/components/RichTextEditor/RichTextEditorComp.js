@@ -5,6 +5,7 @@ import {ActionButtonComp} from "../ActionButton/ActionButtonComp";
 import {controls, createTableColumn, createTableRow} from "./RichTextEditorControls";
 import {ICONS} from "../../common/Icons";
 import {str} from "../../common/Language";
+import {uploadImage} from "./RichTextEditorActions";
 
 /**
  * EditableContent
@@ -17,6 +18,7 @@ import {str} from "../../common/Language";
 export const RichTextEditorComp = ({currentPage}) => {
 
     const refWorkSpace = useRef(null)
+    const refInputFile = useRef(null)
     const [showCode, setShowCode] = useState(false)
     const [showTablePopup, setShowTablePopup] = useState(false)
 
@@ -110,7 +112,16 @@ export const RichTextEditorComp = ({currentPage}) => {
                 onInnerHtmlChangeHandler()
             }
 
-        }
+        },
+        insertImageOpenDialogue: () => {
+            refInputFile.current.click()
+        },
+        insertImageOnChange: (e) => {
+            e.stopPropagation()
+            e.preventDefault()
+            let file = e.target.files[0]
+            uploadImage(currentPage.id, file)
+        },
     }
 
     useEffect(() => {
@@ -223,6 +234,17 @@ export const RichTextEditorComp = ({currentPage}) => {
                         tooltip={str("Code block")}
                     />
 
+                </div>
+                <div className={style.button}>
+                    <input type="file"
+                           onChange={onBtnClick.insertImageOnChange}
+                           ref={refInputFile}
+                           style={{display: 'none'}}/>
+                    <ActionButtonComp
+                        icon={ICONS.fileImage}
+                        onClick={onBtnClick.insertImageOpenDialogue}
+                        tooltip={str("Image")}
+                    />
                 </div>
             </div>
 
