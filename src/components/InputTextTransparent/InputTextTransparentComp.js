@@ -1,14 +1,18 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import style from "./InputTextTransparent.module.css";
 import {ActionButtonComp} from "../ActionButton/ActionButtonComp";
 import {ICONS} from "../../common/Icons";
 import {str} from "../../common/Language";
 
-export const InputTextTransparentComp = ({   defaultText,
+export const InputTextTransparentComp = ({   id = "",
+                                             type = "text",
+                                             defaultText = "",
                                              acceptChanges = () => {},
                                              cancelChanges = () => {},
                                              autoFocus = false,
                                              onChange = () => {},
+                                             onKeyPress = () => {},
+                                             varRef,
                                              fontSize = "large",
                                              hideOkBtn = true,
                                              expressive,
@@ -19,7 +23,9 @@ export const InputTextTransparentComp = ({   defaultText,
 
     const expensiveStyle = !!expressive ? " " + style.expressive : ""
     const [text, setText] = useState(defaultText)
-    const [placeholderRaise, setPlaceholderRaise] = useState(defaultText !== "")
+    const [focus, setFocus] = useState(false)
+    const [placeholderStyle, setPlaceholderStyle] = useState("")
+    const ref = useRef()
 
     const calcStyle = {
         fontSize: fontSize,
@@ -28,7 +34,6 @@ export const InputTextTransparentComp = ({   defaultText,
     const changeText = (newVal) => {
         setText(newVal)
         onChange(newVal)
-        setPlaceholderRaise(newVal !== "")
     }
 
     const acceptChangesHandler = () => {
@@ -44,17 +49,32 @@ export const InputTextTransparentComp = ({   defaultText,
     }
 
     useEffect(() => {
+        if (!!varRef)
+            varRef(ref)
+    }, [varRef])
+
+    useEffect(() => {
         changeText(defaultText)
     }, [defaultText])
+
+    // calc placeholder style
+    useEffect(() => {
+        setPlaceholderStyle(style.title + expensiveStyle + " " + ((text !== "" || focus) ? style.titleRaise : style.titleNormal))
+    }, [text, focus])
 
 
     return <div className={style.wrapper + " " + className}>
         <input style={calcStyle}
+               type={type}
+               id={id}
+               ref={ref}
                autoFocus={autoFocus}
                className={style.input + expensiveStyle}
+               onFocus={() => setFocus(true)}
                value={text}
                onChange={(e) => changeText(e.target.value)}
                onBlur={() => {
+                   setFocus(false)
                    if (hideOkBtn) acceptChangesHandler()
                }}
                onKeyDown={(e) => {
@@ -62,10 +82,11 @@ export const InputTextTransparentComp = ({   defaultText,
                        acceptChangesHandler();
                    if (e.key === 'Escape')
                        cancelChangesHandler();
-
                }}
+               onKeyPress={onKeyPress}
         />
-        <div className={style.title + expensiveStyle + " " + (placeholderRaise ? style.titleRaise : style.titleNormal)}>
+
+        <div className={placeholderStyle}>
             {title}
         </div>
 

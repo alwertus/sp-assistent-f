@@ -6,14 +6,13 @@ import {getToken, getUserInfo, register, updateUser} from "./LoginActions"
 import {str} from "../../common/Language";
 import {InputTextComp} from "../../components/InputText/InputTextComp";
 import {useDispatch, useSelector} from "react-redux";
+import {InputTextTransparentComp} from "../../components/InputTextTransparent/InputTextTransparentComp";
 
-export const LoginComp = props => {
+export const LoginComp = ({setHeader, userInfo, loginStatus, setLoginStatus, setUserInfo}) => {
     // Set back url
     const dispatch = useDispatch()
     const serverURL = useSelector(state => state['serverAddress'])
 
-    const setHeader = props['setHeader']
-    const userInfo = props['userInfo']
     const [login, setLogin] = useState(userInfo.login)
     const [firstName, setFirstName] = useState(userInfo.firstName)
     const [lastName, setLastName] = useState(userInfo.lastName)
@@ -23,9 +22,6 @@ export const LoginComp = props => {
     const [isRegister, setIsRegister] = useState(false)
     const [refLogin, setRefLogin] = useState()
     const [refPassword, setRefPassword] = useState()
-    const loginStatus = props['loginStatus']
-    const setLoginStatus = props['setLoginStatus']
-    const setUserInfo = props['setUserInfo']
     const [btnSave_Active, setBtnSave_Active] = useState(true)
 
     const successRegisterHandler = () => {
@@ -77,6 +73,7 @@ export const LoginComp = props => {
                 isRegister ? onClickRegister() : onClickLogin()
         }
     }
+
     const drawServerURL = () =>
         <div className={style.serverUrlWrapper}>
             <div className={style.serverUrl}>
@@ -189,52 +186,40 @@ export const LoginComp = props => {
             </div>
             <div className={style.inputSection}>
                 <div className={style.inputLine}>
-                    <div className={style.inputLeftPart}>
-                        {str("email")}
-                    </div>
-                    <div className={style.inputRightPart}>
-                        <InputTextComp
-                            key={4}
-                            autoFocus={true}
-                            text={login}
-                            setText={setLogin}
-                            onChange={() => setErrorText("")}
-                            onKeyPress={onKeyPress}
-                            varRef={setRefLogin}
-                        />
-                    </div>
+                    <InputTextTransparentComp
+                        id={"login"}
+                        key={4}
+                        varRef={setRefLogin}
+                        title={str("email")}
+                        autoFocus
+                        onChange={() => setErrorText("")}
+                        acceptChanges={setLogin}
+                        onKeyPress={onKeyPress}
+
+                    />
                 </div>
                 <div className={style.inputLine}>
-                    <div className={style.inputLeftPart}>
-                        {str("password")}
-                    </div>
-                    <div className={style.inputRightPart}>
-                        <InputTextComp
-                            key={5}
-                            text={password}
-                            setText={setPassword}
-                            onChange={() => setErrorText("")}
-                            type={"password"}
-                            onKeyPress={onKeyPress}
-                            varRef={setRefPassword}
-                        />
-                    </div>
+                    <InputTextTransparentComp
+                        id={"password"}
+                        key={5}
+                        type={"password"}
+                        varRef={setRefPassword}
+                        title={str("password")}
+                        onChange={() => setErrorText("")}
+                        onKeyPress={onKeyPress}
+                        acceptChanges={setPassword}
+                    />
                 </div>
                 {isRegister && <div className={style.inputLine}>
-                    <div className={style.inputLeftPart}>
-                        {str("Confirm")}
-                    </div>
-                    <div className={style.inputRightPart}>
-                        <InputTextComp
-                            key={6}
-                            text={passwordConfirm}
-                            setText={setPasswordConfirm}
-                            onChange={() => setErrorText("")}
-                            type={"password"}
-                            onKeyPress={onKeyPress}
-                            varRef={setRefPassword}
-                        />
-                    </div>
+                    <InputTextTransparentComp
+                        id={"password"}
+                        key={6}
+                        type={"password"}
+                        title={str("Confirm")}
+                        onChange={() => setErrorText("")}
+                        onKeyPress={onKeyPress}
+                        acceptChanges={setPasswordConfirm}
+                    />
                 </div>}
                 <div className={style.inputLine}>
                     <div className={style.errorText}>

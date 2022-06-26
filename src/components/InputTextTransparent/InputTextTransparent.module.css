@@ -34,6 +34,7 @@
     pointer-events: none;
     padding: 2px;
     border-radius: 4px;
+    text-transform: capitalize;
 }
 .titleNormal {
     top: 8px;

@@ -64,6 +64,9 @@ const structure = {
         "Hide menu":{                           "ru":"Скрыть меню"},
         "Show menu":{                           "ru":"Показать меню"},
 
+//  Page Timing
+        "Timing":{                              "ru":"Тайминг"},
+
 // Rich editor
         "Underline":{                           "ru":"Подчёркивание"},
         "Bold":{                                "ru":"Жирный"},
