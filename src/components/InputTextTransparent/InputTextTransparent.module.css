@@ -1,7 +1,9 @@
 .wrapper {
     display: flex;
-    flex: 1;
+    /*flex: 1;*/
     position: relative;
+}
+.wrapperWithTitle {
     margin-top: 14px;
 }
 .input {

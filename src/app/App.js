@@ -14,7 +14,6 @@ import imgAccount from "../common/img/account.svg";
 import {getLocalStorageValue} from "../common/LocalStorage";
 import {getUserInfo} from "../pages/Login/LoginActions";
 import {AccountConfirmComp} from "../pages/AccountConfirm/AccountConfirmComp";
-import {TimingComp} from "../pages/Timing/TimingComp";
 
 
 const App = () => {
@@ -57,14 +56,14 @@ const App = () => {
             title:str("Info"),
             available:false,
             comp:infoComponent,
-        },
+        },/*
         {
             key:"timing",
             title:str("Timing"),
             available:false,
             comp:<TimingComp setHeader={setHeaderElement}
                              setFooter={setFooterText}/>
-        },
+        },*/
         {
             key:"cash",
             title:str("Cash"),

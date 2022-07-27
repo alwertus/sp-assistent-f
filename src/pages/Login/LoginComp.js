@@ -84,7 +84,6 @@ export const LoginComp = ({setHeader, userInfo, loginStatus, setLoginStatus, set
                     setText={(newVal) => dispatch({type:"SET_SERVER", newValue: newVal})}
                     onChange={() => setErrorText("")}
                     onKeyPress={onKeyPress}
-                    varRef={setRefLogin}
                 />
             </div>
         </div>

@@ -31,6 +31,11 @@ export const InputTextTransparentComp = ({   id = "",
         fontSize: fontSize,
     }
 
+    const calcWrapperStyle = {
+        // fontSize: fontSize,
+        marginTop: !!title ? "14px" : "0",
+    }
+
     const changeText = (newVal) => {
         setText(newVal)
         onChange(newVal)
@@ -63,7 +68,9 @@ export const InputTextTransparentComp = ({   id = "",
     }, [text, focus])
 
 
-    return <div className={style.wrapper + " " + className}>
+    return <div className={style.wrapper + " " + className}
+                style={calcWrapperStyle}
+    >
         <input style={calcStyle}
                type={type}
                id={id}

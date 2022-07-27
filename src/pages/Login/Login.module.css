@@ -68,6 +68,7 @@
     width: 100%;
     justify-content: flex-end;
 }
-.serverUrl {
-    color: red;
+.serverUrl input {
+    color: #cdcdcd96;
+    background-color: transparent;
 }
