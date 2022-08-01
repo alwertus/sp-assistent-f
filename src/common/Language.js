@@ -90,6 +90,17 @@ const structure = {
         "Image":{                               "ru":"Изображение"},
         "Link":{                                "ru":"Ссылка"},
 
+// Feeding
+        "Feeding":{                             "ru":"Кормление"},
+        "Create new":{                          "ru":"Создать новый"},
+        "Use access string":{                   "ru":"Использовать строку доступа"},
+        "or":{                                  "ru":"или"},
+        "Start":{                               "ru":"Начало"},
+        "Stop":{                                "ru":"Конец"},
+        "Breast":{                              "ru":"Грудь"},
+        "Right":{                               "ru":"Правая"},
+        "Left":{                                "ru":"Левая"},
+        "Interval":{                            "ru":"Интервал"},
     }
 }
 

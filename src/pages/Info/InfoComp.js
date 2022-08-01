@@ -10,10 +10,10 @@ import {PageListObject} from "./PageListObject";
 import {CurrentPageObject} from "./CurrentPageObject";
 
 
-export const InfoComp = ({setHeader, setFooterText, location}) => {
+export const InfoComp = ({setHeader, setFooter, location}) => {
     useSelector(state => state['currentLanguage']) // add this to refresh component when lang is changed
     const {id} = useParams()
-    const pageList = PageListObject(setFooterText)
+    const pageList = PageListObject(setFooter)
     const currentPage = CurrentPageObject(id)
     // const text = <ol>{Array(200).fill(<li key={Math.round(Math.random()*100000000+Math.random()*10000000)}>1</li>)}</ol>
 

@@ -22,6 +22,7 @@ import erase from "./img/eraser-fill.svg"
 import codeBlock from "./img/journal-code.svg"
 import fileImage from "./img/file-image.svg"
 import link from "./img/link.svg"
+import breast from "./img/breast.png"
 
 export const ICONS = {
     menu: <svg
@@ -112,6 +113,9 @@ export const ICONS = {
     tableDeleteRow: <img className={style.image} src={deleteColumn} alt={"alt"} style={{transform:"rotate(-90deg)"}}/>,
     table: <img className={style.image} src={tableIcon} alt={"alt"}/>,
     showCode: <img className={style.image} src={expand} alt={"alt"} style={{transform:"rotate(-90deg)", zIndex:"-1"}}/>,
+
+    breastLeft: <img className={style.imageBig} src={breast} alt={"alt"} style={{transform:"scale(-1, 1)"}}/>,
+    breastRight: <img className={style.imageBig} src={breast} alt={"alt"} />,
 
 
     menu2: <svg preserveAspectRatio="none">

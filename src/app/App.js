@@ -14,6 +14,7 @@ import imgAccount from "../common/img/account.svg";
 import {getLocalStorageValue} from "../common/LocalStorage";
 import {getUserInfo} from "../pages/Login/LoginActions";
 import {AccountConfirmComp} from "../pages/AccountConfirm/AccountConfirmComp";
+import {FeedingComp} from "../pages/Feeding/FeedingComp";
 
 
 const App = () => {
@@ -34,7 +35,7 @@ const App = () => {
         setHeader={setHeaderElement}/>
 
     const infoComponent = <InfoComp setHeader={setHeaderElement}
-                                    setFooterText={setFooterText}
+                                    setFooter={setFooterText}
                                     location={"info"}/>
 
     const pages = [
@@ -64,6 +65,13 @@ const App = () => {
             comp:<TimingComp setHeader={setHeaderElement}
                              setFooter={setFooterText}/>
         },*/
+        {
+            key:"feeding",
+            title:str("Feeding"),
+            available:false,
+            comp:<FeedingComp setHeader={setHeaderElement}
+                             setFooter={setFooterText}/>
+        },
         {
             key:"cash",
             title:str("Cash"),

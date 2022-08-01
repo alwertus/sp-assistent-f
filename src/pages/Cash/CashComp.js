@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {/*useSelector, */useDispatch} from "react-redux";
-import style from "./CashS.module.css";
+import style from "./Cash.module.css";
 
 export const CashComp = props => {
     const setHeader = props['setHeader']
