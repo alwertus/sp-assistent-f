@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import style from "./FeedingData.module.css";
 import {ActionButtonComp} from "../../components/ActionButton/ActionButtonComp";
-import {getData, newTimer, setNewInterval} from "./FeedingActions";
+import {getData, getInviteString, newTimer, setNewInterval} from "./FeedingActions";
 import {str} from "../../common/Language";
 import {useCountdown} from "../../common/hooks/useCountdown";
 import {ICONS} from "../../common/Icons";
@@ -17,12 +17,17 @@ function getDate(millis) {
 }
 
 export const FeedingDataComp = () => {
+    const [inviteString, setInviteString] = useState()
+
     const [data, setData] = useState([])
     const [lastTimerId, setLastTimerId] = useState(undefined)
 
     const [endDate, setEndDate] = useState(undefined)
     const [isEnd, hours, minutes, seconds] = useCountdown(endDate)
     const [interval, setInterval] = useState("02:00")
+
+    const lastChestData = data.find(e => e['id'] === lastTimerId)
+    const lastChest = !!lastChestData ? lastChestData['breast'] : undefined
 
     const updateData = () => getData(setData, setLastTimerId, setInterval)
 
@@ -46,6 +51,14 @@ export const FeedingDataComp = () => {
                        setInterval(e.target.value)
                        setNewInterval(e.target.value)
                    }}/>
+            <div className={style.invite}>
+                {!inviteString && <ActionButtonComp
+                    tooltip={str("Show invite string")}
+                    icon={ICONS.invite}
+                    onClick={() => {getInviteString(setInviteString)}}
+                />}
+                {!!inviteString && <div className={style.inviteString}>{inviteString}</div>}
+            </div>
         </div>
         <div className={style.timer}>
             <div className={isEnd ? style.timerFinished : style.timerInProgress}>
@@ -56,14 +69,14 @@ export const FeedingDataComp = () => {
             <ActionButtonComp
                 className={style.actionsButton}
                 size={"Big"}
-                icon={ICONS.breastLeft}
+                icon={lastChest === "L" ? ICONS.chestInBraLeft : ICONS.breastLeft}
                 tooltip={str("Left")}
                 onClick={() => newTimer("L", updateData)}
             />
             <ActionButtonComp
                 className={style.actionsButton}
                 size={"Big"}
-                icon={ICONS.breastRight}
+                icon={lastChest === "R" ? ICONS.chestInBraRight : ICONS.breastRight}
                 tooltip={str("Right")}
                 onClick={() => newTimer("R", updateData)}
             />

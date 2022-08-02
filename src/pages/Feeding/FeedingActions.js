@@ -41,3 +41,16 @@ export function setNewInterval(newInterval) {
     sendMsg("api/feeding/setNewInterval",{hour: time[0], min: time[1]})
 }
 
+export function getInviteString(setInviteString) {
+    sendMsg("api/feeding/getInviteString",{},
+        rs => {
+            setInviteString(rs['text'])
+        })
+}
+
+export function setInviteString(inviteString, setIsPageCreated) {
+    sendMsg("api/feeding/addAccess",{value: inviteString},
+        () => {
+            setIsPageCreated(true)
+        })
+}

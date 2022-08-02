@@ -23,6 +23,9 @@ import codeBlock from "./img/journal-code.svg"
 import fileImage from "./img/file-image.svg"
 import link from "./img/link.svg"
 import breast from "./img/breast.png"
+import chestInBra from "./img/chest-in-bra.png"
+import invite from "./img/invite.svg"
+
 
 export const ICONS = {
     menu: <svg
@@ -116,6 +119,9 @@ export const ICONS = {
 
     breastLeft: <img className={style.imageBig} src={breast} alt={"alt"} style={{transform:"scale(-1, 1)"}}/>,
     breastRight: <img className={style.imageBig} src={breast} alt={"alt"} />,
+    chestInBraLeft: <img className={style.imageBig} src={chestInBra} alt={"alt"} style={{transform:"scale(-1, 1)"}}/>,
+    chestInBraRight: <img className={style.imageBig} src={chestInBra} alt={"alt"} />,
+    invite: <img className={style.image} src={invite} alt={"alt"} />,
 
 
     menu2: <svg preserveAspectRatio="none">

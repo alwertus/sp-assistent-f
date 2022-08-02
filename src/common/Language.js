@@ -101,6 +101,8 @@ const structure = {
         "Right":{                               "ru":"Правая"},
         "Left":{                                "ru":"Левая"},
         "Interval":{                            "ru":"Интервал"},
+        "First run":{                           "ru":"Первый запуск"},
+        "Show invite string":{                  "ru":"Показать строку приглашения"},
     }
 }
 

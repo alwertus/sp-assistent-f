@@ -19,7 +19,7 @@ const useCountdown = (targetDate) => {
 
 
 const getReturnNegativeValues = (countDown) => {
-    const hours = Math.floor(countDown / (1000 * 60 * 60)) + 1
+    const hours = Math.abs(Math.floor(countDown / (1000 * 60 * 60)) + 1)
     const minutes = Math.abs(Math.floor((countDown % (1000 * 60 * 60)) / (1000 * 60)) + 1)
     const seconds = Math.abs(Math.floor((countDown % (1000 * 60)) / 1000))
 
